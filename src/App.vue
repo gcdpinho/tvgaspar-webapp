@@ -31,7 +31,6 @@
         </div>
       </div>
     </section>
-
     <Footer></Footer>
   </div>
 </template>
@@ -51,8 +50,7 @@
     },
     data() {
       return {
-        allNews: null,
-        imgs: null
+        allNews: []
       };
     },
     mounted() {
@@ -61,7 +59,6 @@
       }).then(
         res => {
           this.allNews = res.data;
-          this.imgs = [];
           this.allNews.map(news =>
             news.images.map(image =>
               firebase.storage().ref().child('imagens/' + image.src).getDownloadURL()
@@ -183,5 +180,22 @@
   }
   .footer-news {
     padding-bottom: 30px;
+  }
+  section#slider {
+    padding: 0;
+  }
+  .VueCarousel-pagination {
+    position: absolute;
+    bottom: 0;
+  }
+  .VueCarousel-navigation-prev {
+    left: 40px !important;
+    color: white !important;
+    font-size: 1.5rem;
+  }
+  .VueCarousel-navigation-next {
+    right: 40px !important;
+    color: white !important;
+    font-size: 1.5rem;
   }
 </style>

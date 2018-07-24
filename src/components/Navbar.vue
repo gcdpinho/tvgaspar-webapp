@@ -84,4 +84,7 @@
     padding: 10px 15px;
     display: block;
   }
+  header{
+    margin-bottom: 30px;
+  }
 </style>

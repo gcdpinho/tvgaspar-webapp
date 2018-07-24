@@ -1,5 +1,5 @@
 <template>
-  <div v-if="ad != null" class="ad" :style="'background: url(\''+ad.image.src +'\') no-repeat 100% 100%'">
+  <div v-if="ad != null" class="ad" :style="`background: url('${ad.image.src}') no-repeat`">
     <a :href="ad.src" target="_blank">
       <p>{{ad.description}}</p>
     </a>
@@ -28,7 +28,6 @@
               res.data[0].image.src = img
               this.ad = res.data[0];
             });
-
         },
         err => {
           console.log(err);
