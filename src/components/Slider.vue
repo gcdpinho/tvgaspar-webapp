@@ -52,6 +52,7 @@
                             )
                         );
                     }, err => {
+                        // eslint-disable-next-line
                         console.log(err);
                     });
                     break;
@@ -65,6 +66,7 @@
                                 .then(img => image.src = img)
                         );
                     }, err => {
+                        // eslint-disable-next-line
                         console.log(err);
                     });
                     break;
