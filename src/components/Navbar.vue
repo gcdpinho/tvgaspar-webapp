@@ -6,7 +6,7 @@
           <img class="logo" src="../assets/logo.png">
         </div>
         <div class="col-6" id="col-ad">
-          <Ad :ad="ad"></Ad>
+          <Ad type="topo"></Ad>
         </div>
       </div>
     </div>
@@ -38,69 +38,50 @@
 </template>
 
 <script>
-import Ad from "./Ad.vue";
+  import Ad from "./Ad.vue";
 
-export default {
-  name: "Navbar",
-  components: {
-    Ad
-  },
-  data() {
-    return {
-      ad: null
-    };
-  },
-  mounted() {
-    this.$http
-      .post(`${this.$apiURL}/ad/byType`, {
-        type: 'topo'
-      })
-      .then(
-        res => {
-          this.ad = res.data[0];
-        },
-        err => {
-          console.log(err);
-        }
-      );
-  }
-};
+  export default {
+    name: "Navbar",
+    components: {
+      Ad
+    }
+  };
 </script>
 
 <style scoped>
-.logo {
-  width: 100%;
-  max-width: 150px;
-}
-#col-ad {
-  display: flex;
-  align-items: center;
-}
-#navbar {
-  width: 100%;
-  background-color: #d4000e;
-  padding: 10px;
-  margin-top: 15px;
-}
-ul {
-  padding: 0;
-  margin: 0;
-}
-li {
-  text-transform: uppercase;
-  display: inline-block;
-  color: white;
-  cursor: pointer;
-  border-left: 1px solid rgba(255, 255, 255, 0.2);
-}
-li:hover {
-  background-color: rgba(0, 0, 0, 0.2);
-}
-li:first-child {
-  border-left: none;
-}
-li a {
-  padding: 10px 15px;
-  display: block;
-}
+  .logo {
+    width: 100%;
+    max-width: 150px;
+  }
+  #col-ad {
+    display: flex;
+    align-items: center;
+  }
+  #navbar {
+    width: 100%;
+    background-color: #d4000e;
+    padding: 10px;
+    margin-top: 15px;
+  }
+  ul {
+    padding: 0;
+    margin: 0;
+  }
+  li {
+    text-transform: uppercase;
+    display: inline-block;
+    color: white;
+    cursor: pointer;
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  li:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  li:first-child {
+    border-left: none;
+  }
+  li a {
+    padding: 10px 15px;
+    display: block;
+  }
 </style>
