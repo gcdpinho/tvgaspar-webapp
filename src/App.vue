@@ -1,13 +1,14 @@
 <template>
   <div id="app">
+    <clip-loader :loading="loader" color="white" size="100px"></clip-loader>
     <Navbar></Navbar>
     <section id="slider">
-      <Slider></Slider>
+      <Slider type="news"></Slider>
     </section>
     <section id="news">
       <div class="container">
         <div class="header">
-          <div class="news-title">
+          <div class="header-title">
             Notícias
           </div>
           > Últimas Notícias
@@ -28,8 +29,25 @@
               </div>
             </div>
           </div>
+          <div class="horizontal-ad">
+            <Ad type="horizontal" :index="0"></Ad>
+          </div>
         </div>
       </div>
+    </section>
+    <section id="slider-images">
+      <div class="container">
+        <div class="header">
+          <div class="header-title">
+            TV Gaspar
+          </div>
+          > Parceiros
+        </div>
+        <Slider type="images"></Slider>
+      </div>
+    </section>
+    <section id="slider-videos">
+      <Gallery type="videos"></Gallery>
     </section>
     <Footer></Footer>
   </div>
@@ -39,18 +57,26 @@
   import Navbar from "./components/Navbar.vue";
   import Footer from "./components/Footer.vue";
   import Slider from "./components/Slider.vue";
+  import Ad from "./components/Ad.vue";
+  import Gallery from "./components/Gallery.vue";
   import firebase from 'firebase';
+  import ClipLoader from 'vue-spinner/src/ClipLoader.vue';
+
 
   export default {
     name: "app",
     components: {
       Navbar,
       Footer,
-      Slider
+      Slider,
+      ClipLoader,
+      Ad,
+      Gallery
     },
     data() {
       return {
-        allNews: []
+        allNews: [],
+        loader: true
       };
     },
     mounted() {
@@ -59,13 +85,15 @@
       }).then(
         res => {
           this.allNews = res.data;
-          this.allNews.map(news =>
+          Promise.all(this.allNews.map(news =>
             news.images.map(image =>
-              firebase.storage().ref().child('imagens/' + image.src).getDownloadURL()
+              firebase.storage().ref().child(`imagens/${image.src}`).getDownloadURL()
                 .then(img => {
                   image.src = img;
                 })
             )
+          )).then(
+            this.loader = false
           );
         },
         err => {
@@ -100,7 +128,7 @@
     font-size: 1.3rem;
   }
 
-  .news-title {
+  .header-title {
     display: inline-block;
     background-color: #d4000e;
     padding: 5px 10px;
@@ -197,5 +225,30 @@
     right: 40px !important;
     color: white !important;
     font-size: 1.5rem;
+  }
+  .v-spinner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 50;
+  }
+  .v-clip {
+    margin: auto;
+    border-width: 8px !important;
+  }
+  .horizontal-ad {
+    max-width: 728px;
+    margin: auto;
+  }
+  #slider-images .header{
+    margin-bottom: 30px;
+  }
+  #slider-videos{
+    background: #141417;
   }
 </style>

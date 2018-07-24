@@ -15,7 +15,8 @@
     },
     data() {
       return {
-        ad: null
+        ad: null,
+        index: 0
       }
     },
     mounted() {
@@ -23,11 +24,12 @@
         type: this.type
       }).then(
         res => {
-          firebase.storage().ref().child('imagens/' + res.data[0].image.src).getDownloadURL()
-            .then(img => {
-              res.data[0].image.src = img
-              this.ad = res.data[0];
-            });
+          if (res.data[this.index])
+            firebase.storage().ref().child('imagens/' + res.data[this.index].image.src).getDownloadURL()
+              .then(img => {
+                res.data[this.index].image.src = img
+                this.ad = res.data[this.index];
+              });
         },
         err => {
           console.log(err);
@@ -40,9 +42,8 @@
 <style scoped>
   .ad {
     max-width: 100%;
-    max-height: 100px;
     width: 100%;
-    height: 200%;
+    height: 100px;
     background-size: 100% 100% !important;
   }
   .ad:hover {

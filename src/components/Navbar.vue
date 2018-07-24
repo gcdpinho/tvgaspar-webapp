@@ -6,7 +6,7 @@
           <img class="logo" src="../assets/logo.png">
         </div>
         <div class="col-6" id="col-ad">
-          <Ad type="topo"></Ad>
+          <Ad type="topo" :index="0"></Ad>
         </div>
       </div>
     </div>

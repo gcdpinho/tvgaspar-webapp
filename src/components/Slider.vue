@@ -1,14 +1,21 @@
 <template>
-    <Carousel v-if="allNews.length" :perPage="1" :navigationEnabled="true" paginationActiveColor="#d4000e">
-        <Slide v-for="news of allNews" :key="news.id">
-            <div class="news-slider" :style="`background: url('${news.images[0].src}') center no-repeat`">
-                <div class="container">
-                    <h2>{{news.headline}}</h2>
-                    <p>{{news.subtitle}}</p>
+    <div class="app-slider">
+        <Carousel v-if="data_slider.length && type =='news'" :perPage="1" :navigationEnabled="true" paginationActiveColor="#d4000e">
+            <Slide v-for="news of data_slider" :key="news.id">
+                <div class="news-slider" :style="`background: url('${news.images[0].src}') center no-repeat`">
+                    <div class="container">
+                        <h2>{{news.headline}}</h2>
+                        <p>{{news.subtitle}}</p>
+                    </div>
                 </div>
-            </div>
-        </Slide>
-    </Carousel>
+            </Slide>
+        </Carousel>
+        <Carousel v-if="data_slider.length && type =='images'" :perPage="4" :paginationEnabled="false" :autoplay="true" :autoplayTimeout="5000" :loop="true">
+            <Slide v-for="image of data_slider" :key="image.id">
+                <img class="images-slider" :src="image.src">
+            </Slide>
+        </Carousel>
+    </div>
 </template>
 
 <script>
@@ -17,32 +24,51 @@
 
     export default {
         name: "Slider",
+        props: {
+            type: ""
+        },
         components: {
             Carousel,
             Slide
         },
         data() {
             return {
-                allNews: []
+                data_slider: []
             }
         },
         mounted() {
-            this.$http.post(`${this.$apiURL}/news/byTag`, {
-                tag: "slider"
-            }).then(res => {
-                this.allNews = res.data;
-                console.log(this.allNews);
-                this.allNews.map(news =>
-                    news.images.map(image =>
-                        firebase.storage().ref().child('imagens/' + image.src).getDownloadURL()
-                            .then(img => {
-                                image.src = img;
-                            })
-                    )
-                );
-            }, err => {
-                console.log(err);
-            });
+            switch (this.type) {
+                case "news":
+                    this.$http.post(`${this.$apiURL}/news/byTag`, {
+                        tag: "slider"
+                    }).then(res => {
+                        this.data_slider = res.data;
+                        this.data_slider.map(news =>
+                            news.images.map(image =>
+                                firebase.storage().ref().child(`imagens/${image.src}`).getDownloadURL()
+                                    .then(img => {
+                                        image.src = img;
+                                    })
+                            )
+                        );
+                    }, err => {
+                        console.log(err);
+                    });
+                    break;
+                case "images":
+                    this.$http.post(`${this.$apiURL}/image/byTag`, {
+                        tag: "slider"
+                    }).then(res => {
+                        this.data_slider = res.data;
+                        this.data_slider.map(image =>
+                            firebase.storage().ref().child(`imagens/${image.src}`).getDownloadURL()
+                                .then(img => image.src = img)
+                        );
+                    }, err => {
+                        console.log(err);
+                    });
+                    break;
+            }
         }
     };
 </script>
@@ -84,5 +110,8 @@
       font-size: 1.2rem;
       text-transform: uppercase;
       font-weight: 500;
+    }
+    .images-slider{
+        width: 95%;
     }
 </style>
