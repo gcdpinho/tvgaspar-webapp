@@ -46,9 +46,11 @@
         <Slider type="images"></Slider>
       </div>
     </section>
-    <section id="slider-videos">
+    <section id="gallery-videos">
       <Gallery type="videos"></Gallery>
     </section>
+    <Ad type="body" :index="0"></Ad>
+    <section id="columnist"></section>
     <Footer></Footer>
   </div>
 </template>
@@ -253,7 +255,7 @@
   #slider-images .header{
     margin-bottom: 30px;
   }
-  #slider-videos{
+  #gallery-videos{
     background: #141417;
   }
 </style>

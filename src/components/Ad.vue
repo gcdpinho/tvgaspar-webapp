@@ -1,5 +1,5 @@
 <template>
-  <div v-if="ad != null" class="ad" :style="`background: url('${ad.image.src}') no-repeat`">
+  <div v-if="ad != null" :class="`ad ${type}`" :style="`background: url('${ad.image.src}') no-repeat`">
     <a :href="ad.src" target="_blank">
       <p>{{ad.description}}</p>
     </a>
@@ -47,8 +47,11 @@
     height: 100px;
     background-size: 100% 100% !important;
   }
+  .ad.body{
+    height: 150px;
+  }
   .ad:hover {
-    opacity: 0.8;
+    opacity: 0.9;
   }
   .ad a {
     display: flex;
@@ -57,6 +60,7 @@
     height: 100%;
     padding: 20px;
     color: white;
+    background: rgba(0,0,0,0.2);
   }
   .ad p {
     margin: auto;

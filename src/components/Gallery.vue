@@ -7,7 +7,7 @@
       <div class="col-3">
         <div class="header">
           <div class="header-title">
-            Vídeo
+            Vídeos
           </div>
           > Últimos vídeos
         </div>
