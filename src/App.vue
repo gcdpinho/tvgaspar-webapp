@@ -50,7 +50,9 @@
       <Gallery type="videos"></Gallery>
     </section>
     <Ad type="body" :index="0"></Ad>
-    <section id="columnist"></section>
+    <section id="columnist">
+      <Slider type="news-columnist"></Slider>
+    </section>
     <Footer></Footer>
   </div>
 </template>
