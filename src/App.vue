@@ -107,7 +107,7 @@
 
 <style>
   html {
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
     height: 100%;
   }
   body {
@@ -115,6 +115,10 @@
   }
   section {
     padding: 30px 0;
+  }
+  div.row{
+    margin-right: 0;
+    margin-left: 0;
   }
   #app {
     font-size: 14px;
