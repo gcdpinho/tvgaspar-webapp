@@ -6,6 +6,7 @@ import VueAxios from 'vue-axios'
 import VueCarousel from 'vue-carousel';
 import firebase from 'firebase';
 import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
+import router from './routes'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
@@ -27,5 +28,6 @@ firebase.initializeApp({
 });
 
 new Vue({
+  router,
   render: h => h(App)
 }).$mount('#app')

@@ -13,8 +13,8 @@
     <div id="navbar">
       <div class="container">
         <ul>
-          <li>
-            <a>Home</a>
+          <li :class="$route.name == 'home' ? 'active' : ''">
+            <router-link to="/">Home</router-link>
           </li>
           <li>
             <a>Mega Menu</a>
@@ -70,11 +70,16 @@
   li {
     text-transform: uppercase;
     display: inline-block;
-    color: white;
     cursor: pointer;
     border-left: 1px solid rgba(255, 255, 255, 0.2);
   }
   li:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  li:hover a {
+    text-decoration: none;
+  }
+  li.active {
     background-color: rgba(0, 0, 0, 0.2);
   }
   li:first-child {
@@ -83,8 +88,9 @@
   li a {
     padding: 10px 15px;
     display: block;
+    color: white !important;
   }
-  header{
+  header {
     margin-bottom: 30px;
   }
 </style>
