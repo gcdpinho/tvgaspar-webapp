@@ -51,7 +51,15 @@
     </section>
     <Ad type="body" :index="0"></Ad>
     <section id="columnist">
-      <Slider type="news-columnist"></Slider>
+      <div class="container">
+        <div class="header">
+          <div class="header-title">
+            Notícias
+          </div>
+          > Colunistas
+        </div>
+        <Slider type="news-columnist"></Slider>
+      </div>
     </section>
     <Footer></Footer>
   </div>
@@ -120,7 +128,7 @@
   section {
     padding: 30px 0;
   }
-  div.row{
+  div.row {
     margin-right: 0;
     margin-left: 0;
   }
@@ -254,10 +262,25 @@
     max-width: 728px;
     margin: auto;
   }
-  #slider-images .header{
+  #slider-images .header,
+  #columnist .header {
     margin-bottom: 30px;
   }
-  #gallery-videos{
+  #gallery-videos {
     background: #141417;
+  }
+  #columnist .header-title {
+    background-color: #ff9800;
+  }
+  #columnist .each-news {
+    margin: 0 5px;
+  }
+  .news-columnist .VueCarousel-navigation-prev{
+    left: 0 !important;
+    color: #141417 !important;
+  }
+   .news-columnist .VueCarousel-navigation-next{
+    right: 0 !important;
+    color: #141417 !important;
   }
 </style>
