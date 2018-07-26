@@ -11,12 +11,12 @@
   export default {
     name: "Ad",
     props: {
-      type: ""
+      type: "",
+      index: 0
     },
     data() {
       return {
-        ad: null,
-        index: 0
+        ad: null
       }
     },
     mounted() {

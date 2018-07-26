@@ -14,9 +14,10 @@
           > Últimas Notícias
         </div>
         <div class="inner-news">
-          <div class="row">
-            <div class="col-4" v-for="news of allNews" :key="news.id">
-              <div class="each-news" v-bind:style="news.categories.length > 0 ? '--color:'+news.categories[0].color : ''">
+          <div class="row" v-for="r in Math.ceil(allNews.length/news_line)" :key="r">
+            <div :class="`col col-${12/news_line}`" 
+            v-for="news of allNews.slice((r-1)*news_line, allNews.length>(r-1)*news_line + news_line ? (r-1)*news_line + news_line : allNews.length)" :key="news.id">
+              <div class="each-news" :style="news.categories.length > 0 ? '--color:'+news.categories[0].color : ''">
                 <div class="img-news text-center">
                   <img v-if="news.images.length > 0" :src="news.images[0].src">
                   <span v-if="news.categories.length > 0" class="category">{{news.categories[0].category}}</span>
@@ -28,9 +29,9 @@
                 <div class="footer-news"></div>
               </div>
             </div>
-          </div>
-          <div class="horizontal-ad">
-            <Ad type="horizontal" :index="0"></Ad>
+            <div v-if="r%lines_ad == 0" class="horizontal-ad col col-12">
+              <Ad type="horizontal" :index="r/lines_ad-1"></Ad>
+            </div>
           </div>
         </div>
       </div>
@@ -88,7 +89,9 @@
     data() {
       return {
         allNews: [],
-        loader: true
+        loader: true,
+        lines_ad: 2,
+        news_line: 3
       };
     },
     mounted() {
@@ -113,7 +116,7 @@
           console.log(err);
         }
       );
-    },
+    }
   };
 </script>
 
@@ -154,7 +157,7 @@
   .inner-news {
     margin-top: 30px;
   }
-  .inner-news .col-4 {
+  .inner-news .col {
     margin-bottom: 30px;
   }
   #news {
@@ -272,21 +275,21 @@
   #columnist .header-title {
     background-color: #ff9800;
   }
-  #slider-images .header-title{
+  #slider-images .header-title {
     background-color: #4b25e4;
   }
-  #gallery-videos .header-title{
+  #gallery-videos .header-title {
     background-color: white;
     color: #0e0e0e;
   }
   #columnist .each-news {
     margin: 0 5px;
   }
-  .news-columnist .VueCarousel-navigation-prev{
+  .news-columnist .VueCarousel-navigation-prev {
     left: 0 !important;
     color: #141417 !important;
   }
-   .news-columnist .VueCarousel-navigation-next{
+  .news-columnist .VueCarousel-navigation-next {
     right: 0 !important;
     color: #141417 !important;
   }
