@@ -73,7 +73,7 @@
     height: 2px;
     position: absolute;
     width: 50px;
-    background-color: #d4000e;
+    background-color: #9d3138;
     left: 2px;
   }
   h3::after {

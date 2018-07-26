@@ -59,7 +59,7 @@
   }
   #navbar {
     width: 100%;
-    background-color: #d4000e;
+    background-color: #9d3138;
     padding: 10px;
     margin-top: 15px;
   }

@@ -147,7 +147,7 @@
 
   .header-title {
     display: inline-block;
-    background-color: #d4000e;
+    background-color: #9d3138;
     padding: 5px 10px;
     color: white;
   }
@@ -271,6 +271,13 @@
   }
   #columnist .header-title {
     background-color: #ff9800;
+  }
+  #slider-images .header-title{
+    background-color: #4b25e4;
+  }
+  #gallery-videos .header-title{
+    background-color: white;
+    color: #0e0e0e;
   }
   #columnist .each-news {
     margin: 0 5px;
