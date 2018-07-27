@@ -15,12 +15,14 @@
     "vue-axios": "^2.1.2",
     "vue-carousel": "^0.10.0",
     "vue-router": "^3.0.1",
-    "vue-spinner": "^1.0.3"
+    "vue-spinner": "^1.0.3",
+    "vuetify": "^1.1.8"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.0-rc.5",
     "@vue/cli-plugin-eslint": "^3.0.0-rc.5",
     "@vue/cli-service": "^3.0.0-rc.5",
+    "font-awesome": "^4.7.0",
     "vue-template-compiler": "^2.5.16"
   },
   "eslintConfig": {

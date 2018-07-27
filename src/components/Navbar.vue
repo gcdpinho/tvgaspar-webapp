@@ -20,7 +20,16 @@
             <a>Mega Menu</a>
           </li>
           <li>
-            <a>Notícias</a>
+            <a class="bt-menu-dropdown" v-on:click="news.show = !news.show">Notícias
+              <v-icon>fa fa-chevron-down</v-icon>
+            </a>
+            <div class="menu-dropdown" v-if="news.show">
+              <ul>
+                <li class="item-menu" v-for="category of news.categories" :key="category.id">
+                  {{category.category}}
+                </li>
+              </ul>
+            </div>
           </li>
           <li>
             <a>Ao Vivo</a>
@@ -44,7 +53,31 @@
     name: "Navbar",
     components: {
       Ad
-    }
+    },
+    data() {
+      return {
+        news: {
+          show: false,
+          categories: []
+        }
+      }
+    },
+    mounted() {
+      var self = this;
+      window.addEventListener('click', function (e) {
+        if (e.target.className != 'item-menu' && e.target.className != 'bt-menu-dropdown')
+          self.news.show = false;
+      })
+      this.$http.get(`${this.$apiURL}/category`)
+        .then(res => {
+          this.news.categories = res.data;
+        },
+          err => {
+            // eslint-disable-next-line
+            console.log(err);
+          }
+        );
+    },
   };
 </script>
 
@@ -92,5 +125,23 @@
   }
   header {
     margin-bottom: 30px;
+  }
+  .menu-dropdown {
+    position: absolute;
+    background: #9d3138;
+    color: white;
+    z-index: 99;
+  }
+  .menu-dropdown li {
+    display: block;
+    padding: 10px;
+    border-left: none;
+  }
+  .bt-menu-dropdown {
+    display: flex;
+    align-items: center;
+  }
+  .bt-menu-dropdown i{
+    margin-left: 5px;
   }
 </style>
