@@ -10,23 +10,23 @@
         </div>
       </div>
     </div>
-    <div id="navbar">
+    <div id="navbar" :style="color == undefined ? '--color: #9d3138': '--color:'+ color">
       <div class="container">
         <ul>
-          <li :class="$route.name == 'home' ? 'active' : ''">
+          <li :class="$route.name == 'Home' ? 'active' : ''">
             <router-link to="/">Home</router-link>
           </li>
           <li>
             <a>Mega Menu</a>
           </li>
-          <li>
+          <li :class="$route.name == 'NewsByCategory' ? 'active' : ''">
             <a class="bt-menu-dropdown" v-on:click="news.show = !news.show">Notícias
               <v-icon>fa fa-chevron-down</v-icon>
             </a>
             <div class="menu-dropdown" v-if="news.show">
               <ul>
                 <li class="item-menu" v-for="category of news.categories" :key="category.id">
-                  {{category.category}}
+                  <router-link :to="`/NewsByCategory/${category.category}`">{{category.category}}</router-link>
                 </li>
               </ul>
             </div>
@@ -51,6 +51,9 @@
 
   export default {
     name: "Navbar",
+    props: {
+      color: ""
+    },
     components: {
       Ad
     },
@@ -92,7 +95,7 @@
   }
   #navbar {
     width: 100%;
-    background-color: #9d3138;
+    background-color: var(--color);
     padding: 10px;
     margin-top: 15px;
   }
@@ -128,20 +131,19 @@
   }
   .menu-dropdown {
     position: absolute;
-    background: #9d3138;
+    background: var(--color);
     color: white;
     z-index: 99;
   }
   .menu-dropdown li {
     display: block;
-    padding: 10px;
     border-left: none;
   }
   .bt-menu-dropdown {
     display: flex;
     align-items: center;
   }
-  .bt-menu-dropdown i{
+  .bt-menu-dropdown i {
     margin-left: 5px;
   }
 </style>

@@ -120,6 +120,11 @@
 </script>
 
 <style scoped>
+  #home {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
   section#slider {
     padding: 0;
   }
@@ -140,5 +145,4 @@
     background-color: white;
     color: #0e0e0e;
   }
-
 </style>

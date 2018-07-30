@@ -10,14 +10,12 @@
                 </div>
             </Slide>
         </Carousel>
-        <Carousel v-if="data_slider.length && type =='images'" :perPage="4" :paginationEnabled="false" 
-        :autoplay="true" :autoplayTimeout="5000" :loop="true">
+        <Carousel v-if="data_slider.length && type =='images'" :perPage="4" :paginationEnabled="false" :autoplay="true" :autoplayTimeout="5000" :loop="true">
             <Slide v-for="image of data_slider" :key="image.id">
                 <img class="images-slider" :src="image.src">
             </Slide>
         </Carousel>
-        <Carousel v-if="data_slider.length && type =='news-columnist'" :class="type"
-        :perPage="4" :paginationEnabled="false" :autoplay="true" :autoplayTimeout="5000" :loop="true" :navigationEnabled="true">
+        <Carousel v-if="data_slider.length && type =='news-columnist'" :class="type" :perPage="4" :paginationEnabled="false" :autoplay="true" :autoplayTimeout="5000" :loop="true" :navigationEnabled="true">
             <Slide v-for="news of data_slider" :key="news.id">
                 <div class="each-news" v-bind:style="news.categories.length > 0 ? '--color:'+news.categories[0].color : ''">
                     <div class="img-news text-center">
@@ -42,7 +40,8 @@
     export default {
         name: "Slider",
         props: {
-            type: ""
+            type: "",
+            category: ""
         },
         components: {
             Carousel,
@@ -56,23 +55,42 @@
         mounted() {
             switch (this.type) {
                 case "news":
-                    this.$http.post(`${this.$apiURL}/news/byTagNotCategory`, {
-                        tag: "slider",
-                        category: "Colunista"
-                    }).then(res => {
-                        this.data_slider = res.data;
-                        this.data_slider.map(news =>
-                            news.images.map(image =>
-                                firebase.storage().ref().child(`imagens/${image.src}`).getDownloadURL()
-                                    .then(img => {
-                                        image.src = img;
-                                    })
-                            )
-                        );
-                    }, err => {
-                        // eslint-disable-next-line
-                        console.log(err);
-                    });
+                    if (this.category == undefined)
+                        this.$http.post(`${this.$apiURL}/news/byTagNotCategory`, {
+                            tag: "slider",
+                            category: "Colunista"
+                        }).then(res => {
+                            this.data_slider = res.data;
+                            this.data_slider.map(news =>
+                                news.images.map(image =>
+                                    firebase.storage().ref().child(`imagens/${image.src}`).getDownloadURL()
+                                        .then(img => {
+                                            image.src = img;
+                                        })
+                                )
+                            );
+                        }, err => {
+                            // eslint-disable-next-line
+                            console.log(err);
+                        });
+                    else
+                        this.$http.post(`${this.$apiURL}/news/byTagByCategory`, {
+                            tag: "slider",
+                            category: this.category
+                        }).then(res => {
+                            this.data_slider = res.data;
+                            this.data_slider.map(news =>
+                                news.images.map(image =>
+                                    firebase.storage().ref().child(`imagens/${image.src}`).getDownloadURL()
+                                        .then(img => {
+                                            image.src = img;
+                                        })
+                                )
+                            );
+                        }, err => {
+                            // eslint-disable-next-line
+                            console.log(err);
+                        });
                     break;
                 case "images":
                     this.$http.post(`${this.$apiURL}/image/byTag`, {
