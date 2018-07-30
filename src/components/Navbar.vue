@@ -10,7 +10,7 @@
         </div>
       </div>
     </div>
-    <div id="navbar" :style="color == undefined ? '--color: #9d3138': '--color:'+ color">
+    <div id="navbar" :style="color == undefined || color == '' || color == null ? '--color: #9d3138': '--color:'+ color">
       <div class="container">
         <ul>
           <li :class="$route.name == 'Home' ? 'active' : ''">
@@ -66,6 +66,7 @@
       }
     },
     mounted() {
+      console.log(this.color);
       var self = this;
       window.addEventListener('click', function (e) {
         if (e.target.className != 'item-menu' && e.target.className != 'bt-menu-dropdown')

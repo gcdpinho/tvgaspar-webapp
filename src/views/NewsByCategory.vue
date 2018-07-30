@@ -1,15 +1,15 @@
 <template>
   <div class="newsByCategory">
     <clip-loader :loading="loader" color="white" size="100px"></clip-loader>
-    <Navbar></Navbar>
+    <Navbar :color="color"></Navbar>
     <section id="slider">
       <Slider type="news" :category="category"></Slider>
     </section>
     <section id="news-vertical">
       <div class="row">
         <div class="col-10">
-          <div class="row" v-for="news of allNews" :key="news.id">
-            <div class="col-4">
+          <div class="row each" v-for="news of allNews" :key="news.id">
+            <div class="col-4 text-center">
               <img v-if="news.images.length > 0" :src="news.images[0].src">
             </div>
             <div class="col-8">
@@ -48,10 +48,23 @@
     data() {
       return {
         loader: true,
-        allNews: []
+        allNews: [],
+        color: ""
       }
     },
     mounted() {
+      this.$http.post(`${this.$apiURL}/category`, {
+        category: this.category
+      }).then(res => {
+        if (res.data.length > 0)
+          this.color = res.data[0].color;
+      },
+        err => {
+          // eslint-disable-next-line
+          console.log(err);
+        }
+      );
+
       this.$http.post(`${this.$apiURL}/news/byTagByCategory`, {
         tag: 'notícia',
         category: this.category
@@ -90,7 +103,16 @@
     flex-direction: column;
     height: 100%;
   }
-  #news-vertical img{
-    width: 100%;
+  #news-vertical img {
+    max-width: 100%;
+    height: 100%;
+  }
+  .row.each{
+    height: 250px;
+    padding: 30px 0;
+    border-bottom: 1px solid #70717c;
+  }
+  .row.each:last-child{
+    border-bottom: none;
   }
 </style>
