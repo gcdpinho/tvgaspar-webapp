@@ -66,7 +66,6 @@
       }
     },
     mounted() {
-      console.log(this.color);
       var self = this;
       window.addEventListener('click', function (e) {
         if (e.target.className != 'item-menu' && e.target.className != 'bt-menu-dropdown')

@@ -2,23 +2,27 @@
   <div class="newsByCategory">
     <clip-loader :loading="loader" color="white" size="100px"></clip-loader>
     <Navbar :color="color"></Navbar>
-    <section id="slider">
+    <section id="slider" v-if="category != 'Colunista'">
       <Slider type="news" :category="category"></Slider>
     </section>
     <section id="news-vertical">
-      <div class="row">
-        <div class="col-10">
-          <div class="row each" v-for="news of allNews" :key="news.id">
-            <div class="col-4 text-center">
-              <img v-if="news.images.length > 0" :src="news.images[0].src">
-            </div>
-            <div class="col-8">
-              <h3>{{news.headline}}</h3>
-              <p>{{news.abstract}}</p>
+      <div class="container">
+        <div class="row">
+          <div class="col-10" :style="allNews.length > 0 ? `--color:${color}` : ''">
+            <div class="row each" v-for="news of allNews" :key="news.id">
+              <div class="col-4 text-center">
+                <img v-if="news.images.length > 0" :src="news.images[0].src">
+              </div>
+              <div class="col-8">
+                <h3 :style="`color:${color}`">{{news.headline}}</h3>
+                <p>{{news.abstract}}</p>
+              </div>
             </div>
           </div>
+          <div class="col-2" v-if="allNews.length > 0">
+            <Ad type="vertical" :index="0"></Ad>
+          </div>
         </div>
-        <div class="col-8"></div>
       </div>
     </section>
     <Footer></Footer>
@@ -71,7 +75,6 @@
       }).then(
         res => {
           this.allNews = res.data;
-          console.log(this.allNews);
           Promise.all(this.allNews.map(news =>
             news.images.map(image =>
               firebase.storage().ref().child(`imagens/${image.src}`).getDownloadURL()
@@ -107,12 +110,23 @@
     max-width: 100%;
     height: 100%;
   }
-  .row.each{
+  .each {
     height: 250px;
     padding: 30px 0;
-    border-bottom: 1px solid #70717c;
+    border-bottom: 1px solid #d6dadd;
+    cursor: pointer;
   }
-  .row.each:last-child{
+  .each p:hover {
+    color: var(--color);
+  }
+
+  .each img:hover{
+    opacity: 0.8;
+  }
+  .each:last-child {
     border-bottom: none;
+  }
+  .each h3 {
+    margin-bottom: 20px;
   }
 </style>

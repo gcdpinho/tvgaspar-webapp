@@ -19,7 +19,7 @@
               <div class="each-news" :style="news.categories.length > 0 ? '--color:'+news.categories[0].color : ''">
                 <div class="img-news text-center">
                   <img v-if="news.images.length > 0" :src="news.images[0].src">
-                  <span v-if="news.categories.length > 0" class="category">{{news.categories[0].category}}</span>
+                  <router-link v-if="news.categories.length > 0" class="category" :to="{path: `/NewsByCategory/${news.categories[0].category}`}">{{news.categories[0].category}}</router-link>
                 </div>
                 <div class="inner">
                   <h3>{{news.headline}}</h3>
@@ -89,7 +89,8 @@
         allNews: [],
         loader: true,
         lines_ad: 2,
-        news_line: 3
+        news_line: 3,
+        limit: 20
       };
     },
     mounted() {
@@ -97,7 +98,10 @@
         tag: 'notícia'
       }).then(
         res => {
-          this.allNews = res.data;
+          if (res.data.length > this.limit)
+            this.allNews = res.data.slice(0, this.limit);
+          else
+            this.allNews = res.data;
           Promise.all(this.allNews.map(news =>
             news.images.map(image =>
               firebase.storage().ref().child(`imagens/${image.src}`).getDownloadURL()

@@ -6,11 +6,11 @@
           <img class="logo" src="../assets/logo-white.png">
         </div>
         <div class="col-6">
-          <h3>Tags</h3>
-          <div class="tag-content">
-            <div class="tag" v-for="tag of tags" :key="tag.id">
-              {{tag.tag}}
-            </div>
+          <h3>Categorias</h3>
+          <div class="category-content">
+            <router-link :to="`/NewsByCategory/${category.category}`" class="category-inner" v-for="category of categories" :key="category.id">
+              {{category.category}}
+            </router-link>
           </div>
         </div>
       </div>
@@ -30,13 +30,13 @@
     name: "Footer",
     data() {
       return {
-        tags: null
+        categories: null
       };
     },
     mounted() {
-      this.$http.get(`${this.$apiURL}/tag`).then(
+      this.$http.get(`${this.$apiURL}/category`).then(
         res => {
-          this.tags = res.data;
+          this.categories = res.data;
         },
         err => {
           // eslint-disable-next-line
@@ -72,7 +72,7 @@
     display: block;
     height: 2px;
     position: absolute;
-    width: 50px;
+    width: 80px;
     background-color: #9d3138;
     left: 2px;
   }
@@ -82,9 +82,9 @@
     display: block;
     height: 2px;
     margin: 5px 2px;
-    width: 80px;
+    width: 150px;
   }
-  .tag {
+  .category-inner {
     cursor: pointer;
     color: white;
     background-color: #70717c;
@@ -93,13 +93,15 @@
     border-radius: 2px;
     display: inline-block;
   }
-  .tag:hover {
+  .category-inner:hover {
     background-color: #f2f2f6;
     color: #70717c;
+    text-decoration: none;
   }
-  .tag-content {
+  .category-content {
     max-width: 60%;
   }
+
   #col-logo {
     display: flex;
     align-items: center;

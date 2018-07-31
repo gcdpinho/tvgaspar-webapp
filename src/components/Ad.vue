@@ -66,4 +66,7 @@
     margin: auto;
     line-height: 1;
   }
+  .ad.vertical{
+    height: 400px;
+  }
 </style>

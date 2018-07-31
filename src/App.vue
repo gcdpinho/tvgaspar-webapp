@@ -153,6 +153,10 @@
     background-color: var(--color);
     color: white;
   }
+  .category:hover{
+    text-decoration: none;
+    color: white;
+  }
   .footer-news {
     padding-bottom: 30px;
   }
