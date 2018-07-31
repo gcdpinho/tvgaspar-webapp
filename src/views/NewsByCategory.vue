@@ -9,7 +9,7 @@
       <div class="container">
         <div class="row">
           <div class="col-10" :style="allNews.length > 0 ? `--color:${color}` : ''">
-            <div class="row each" v-for="news of allNews" :key="news.id">
+            <div class="row each" v-for="news of allNews" :key="news.id" v-on:click="showNews(news)">
               <div class="col-4 text-center">
                 <img v-if="news.images.length > 0" :src="news.images[0].src">
               </div>
@@ -96,6 +96,11 @@
       '$route.category'(category) {
         this.category = category;
       }
+    },
+    methods: {
+      showNews: function (news) {
+        this.$router.push({ name: "NewsDetail", params: { category: this.category, news: news } })
+      }
     }
   }
 </script>
@@ -120,7 +125,7 @@
     color: var(--color);
   }
 
-  .each img:hover{
+  .each img:hover {
     opacity: 0.8;
   }
   .each:last-child {

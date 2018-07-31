@@ -2,7 +2,7 @@
     <div class="app-slider">
         <Carousel v-if="data_slider.length && type =='news'" :perPage="1" :navigationEnabled="true" paginationActiveColor="#9d3138">
             <Slide v-for="news of data_slider" :key="news.id">
-                <div class="news-slider" v-if="news.images.length > 0" :style="`background: url('${news.images[0].src}') center no-repeat`">
+                <div class="news-slider" v-if="news.images.length > 0" :style="`background: url('${news.images[0].src}') center no-repeat`" v-on:click="showNews(news, news.categories[0].category)">
                     <div class="container">
                         <h2>{{news.headline}}</h2>
                         <p>{{news.subtitle}}</p>
@@ -17,7 +17,7 @@
         </Carousel>
         <Carousel v-if="data_slider.length && type =='news-columnist'" :class="type" :perPage="4" :paginationEnabled="false" :autoplay="true" :autoplayTimeout="5000" :loop="true" :navigationEnabled="true">
             <Slide v-for="news of data_slider" :key="news.id">
-                <div class="each-news" v-bind:style="news.categories.length > 0 ? '--color:'+news.categories[0].color : ''">
+                <div class="each-news" v-bind:style="news.categories.length > 0 ? '--color:'+news.categories[0].color : ''" v-on:click="showNews(news, news.categories[0].category)">
                     <div class="img-news text-center">
                         <img v-if="news.images.length > 0" :src="news.images[0].src">
                         <span v-if="news.categories.length > 0" class="category">{{news.categories[0].category}}</span>
@@ -126,6 +126,11 @@
                     });
                     break;
             }
+        },
+        methods: {
+            showNews: function (news, category) {
+                this.$router.push({ name: "NewsDetail", params: { category: category, news: news } })
+            }
         }
     };
 </script>
@@ -170,5 +175,10 @@
     }
     .images-slider {
       width: 95%;
+    }
+    .news-slider,
+    .images-slider,
+    .each-news {
+      cursor: pointer;
     }
 </style>
