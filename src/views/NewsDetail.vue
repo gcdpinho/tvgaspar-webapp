@@ -43,7 +43,14 @@
     data() {
       return {
         loader: true,
-        color: ""
+        color: "",
+        imageTemplate: `<div class="img-news-detail">
+                          <img src="src-img" />
+                        </div>`,
+        videoTemplate: `<div class="video-news-detail">
+                          <iframe width="100%" height="100%" src="src-video"></iframe>
+                        </div>`
+                        
       }
     },
     mounted() {
@@ -52,13 +59,46 @@
       }).then(res => {
         if (res.data.length > 0)
           this.color = res.data[0].color;
-        this.loader = false;
+        this.changeTags('<video>', '</video>', "video");
+        this.changeTags('<img>', '</img>', "image");
       },
         err => {
           // eslint-disable-next-line
           console.log(err);
+          this.loader = false;
         }
       );
+    },
+    methods: {
+      changeTags: function (openTag, closeTag, type) {
+        Promise.all(
+          this.news.body.split(openTag).map(element => {
+            var e = element.split(closeTag);
+            if (e.length > 1)
+              switch (type) {
+                case "image":
+                  firebase.storage().ref().child(`imagens/${e[0]}`).getDownloadURL()
+                    .then(img =>
+                      this.news.body = this.news.body.replace(`${openTag}${e[0]}${closeTag}`, this.imageTemplate.replace('src-img', img))
+                    )
+                    .catch(err => {
+                      // eslint-disable-next-line
+                      console.log(err);
+                      this.loader = false;
+                    });
+                  break;
+                case "video":
+                  this.news.body = this.news.body.replace(`${openTag}${e[0]}${closeTag}`, this.videoTemplate.replace('src-video', e[0]))
+                  break;
+              }
+          })
+        ).then(this.loader = false)
+          .catch(err => {
+            // eslint-disable-next-line
+            console.log(err);
+            this.loader = false;
+          });
+      }
     }
   }
 </script>
@@ -69,21 +109,21 @@
     flex-direction: column;
     height: 100%;
   }
-  h2{
+  h2 {
     font-weight: bold;
   }
-  .title p{
+  .title p {
     font-size: 1.2rem;
     font-weight: 400;
   }
-  .author{
+  .author {
     margin-bottom: 30px;
   }
-  .author p{
+  .author p {
     margin-bottom: 0;
     font-size: 0.8rem;
   }
-  .author p.bold{
+  .author p.bold {
     font-weight: bold;
   }
 </style>

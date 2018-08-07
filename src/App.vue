@@ -153,7 +153,7 @@
     background-color: var(--color);
     color: white;
   }
-  .category:hover{
+  .category:hover {
     text-decoration: none;
     color: white;
   }
@@ -166,5 +166,21 @@
   }
   #columnist .each-news {
     margin: 0 5px;
+  }
+  .img-news-detail {
+    width: 100%;
+    margin: 30px 0;
+  }
+
+  .img-news-detail img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+  }
+
+  .video-news-detail{
+    margin: 30px 0;
+    width: 100%;
+    height: 500px;
   }
 </style>
