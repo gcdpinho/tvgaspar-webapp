@@ -8,6 +8,7 @@ import firebase from 'firebase';
 import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
 import router from './routes'
 import Vuetify from 'vuetify'
+import VueMq from 'vue-mq'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'font-awesome/css/font-awesome.min.css'
@@ -22,6 +23,13 @@ Vue.use(ClipLoader);
 Vue.use(Vuetify, {
   iconfont: 'fa4'
 });
+
+Vue.use(VueMq, {
+  breakpoints: {
+    md: 767,
+    desktop: Infinity
+  }
+})
 
 firebase.initializeApp({
   apiKey: "AIzaSyAN8z_RHWKICWDl-QQ5cAQ8b1LvIWfrvOw",

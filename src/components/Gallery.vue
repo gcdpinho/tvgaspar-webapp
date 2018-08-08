@@ -1,10 +1,16 @@
 <template>
   <div class="app-gallery" v-if="data_gallery.length">
     <div class="row">
-      <div class="col-9">
+      <div class="col-md-9">
+        <div class="header mobile">
+          <div class="header-title">
+            Vídeos
+          </div>
+          > Últimos vídeos
+        </div>
         <iframe width="100%" height="100%" :src="first_data_gallery.src"></iframe>
       </div>
-      <div class="col-3">
+      <div class="col-md-3 desk">
         <div class="header">
           <div class="header-title">
             Vídeos
@@ -81,5 +87,19 @@
   .header {
     color: white;
     margin-bottom: 20px;
+  }
+  .mobile{
+    display: none;
+  }
+  @media (max-width: 767px){
+    .mobile{
+      display: block;
+    }
+    .desk{
+      display: none;
+    }
+    iframe{
+      height: auto;
+    }
   }
 </style>

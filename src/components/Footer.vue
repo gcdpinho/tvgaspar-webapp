@@ -83,6 +83,7 @@
     height: 2px;
     margin: 5px 2px;
     width: 150px;
+    max-width: 100%;
   }
   .category-inner {
     cursor: pointer;

@@ -8,18 +8,18 @@
     <section id="news-vertical">
       <div class="container">
         <div class="row">
-          <div class="col-10" :style="allNews.length > 0 ? `--color:${color}` : ''">
+          <div :class="`col-${$mq === 'md' ? 12 : 10}`" :style="allNews.length > 0 ? `--color:${color}` : ''">
             <div class="row each" v-for="news of allNews" :key="news.id" v-on:click="showNews(news)">
-              <div class="col-4 text-center">
-                <img v-if="news.images.length > 0" :src="news.images[0].src">
+              <div class="col-md-4 text-center">
+                <img class="img-news" v-if="news.images.length > 0" :src="news.images[0].src">
               </div>
-              <div class="col-8">
+              <div class="col-md-8">
                 <h3 :style="`color:${color}`">{{news.headline}}</h3>
                 <p>{{news.abstract}}</p>
               </div>
             </div>
           </div>
-          <div class="col-2" v-if="allNews.length > 0">
+          <div class="col-2" v-if="allNews.length > 0 && $mq != 'md'">
             <Ad type="vertical" :index="0"></Ad>
           </div>
         </div>
@@ -134,5 +134,13 @@
   }
   .each h3 {
     margin-bottom: 20px;
+  }
+  @media (max-width: 767px) {
+    #news-vertical img {
+      height: auto;
+    }
+    .each {
+      height: auto;
+    }
   }
 </style>

@@ -10,12 +10,12 @@
                 </div>
             </Slide>
         </Carousel>
-        <Carousel v-if="data_slider.length && type =='images'" :perPage="4" :paginationEnabled="false" :autoplay="true" :autoplayTimeout="5000" :loop="true">
+        <Carousel v-if="data_slider.length && type =='images'" :perPage="$mq === 'md' ? 2 : 4" :paginationEnabled="false" :autoplay="true" :autoplayTimeout="5000" :loop="true">
             <Slide v-for="image of data_slider" :key="image.id">
                 <img class="images-slider" :src="image.src">
             </Slide>
         </Carousel>
-        <Carousel v-if="data_slider.length && type =='news-columnist'" :class="type" :perPage="4" :paginationEnabled="false" :autoplay="true" :autoplayTimeout="5000" :loop="true" :navigationEnabled="true">
+        <Carousel v-if="data_slider.length && type =='news-columnist'" :class="type" :perPage="$mq === 'md' ? 1 : 4" :paginationEnabled="false" :autoplay="false" :autoplayTimeout="5000" :loop="true" :navigationEnabled="true">
             <Slide v-for="news of data_slider" :key="news.id">
                 <div class="each-news" v-bind:style="news.categories.length > 0 ? '--color:'+news.categories[0].color : ''" v-on:mouseup="up($event, news, news.categories[0].category)" v-on:mousedown="down($event)">
                     <div class="img-news text-center">

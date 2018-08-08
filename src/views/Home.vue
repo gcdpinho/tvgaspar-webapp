@@ -15,7 +15,7 @@
         </div>
         <div class="inner-news">
           <div class="row" v-for="r in Math.ceil(allNews.length/news_line)" :key="r">
-            <div :class="`col col-${12/news_line}`" v-for="news of allNews.slice((r-1)*news_line, allNews.length>(r-1)*news_line + news_line ? (r-1)*news_line + news_line : allNews.length)" :key="news.id">
+            <div :class="`col col-md-${12/news_line}`" v-for="news of allNews.slice((r-1)*news_line, allNews.length>(r-1)*news_line + news_line ? (r-1)*news_line + news_line : allNews.length)" :key="news.id">
               <div class="each-news" :style="news.categories.length > 0 ? '--color:'+news.categories[0].color : ''" v-on:click="showNews($event, news, news.categories[0].category)">
                 <div class="img-news text-center">
                   <img v-if="news.images.length > 0" :src="news.images[0].src">

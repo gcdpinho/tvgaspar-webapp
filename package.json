@@ -14,6 +14,7 @@
     "vue": "^2.5.16",
     "vue-axios": "^2.1.2",
     "vue-carousel": "^0.10.0",
+    "vue-mq": "^0.2.1",
     "vue-router": "^3.0.1",
     "vue-spinner": "^1.0.3",
     "vuetify": "^1.1.8"

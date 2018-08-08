@@ -178,9 +178,27 @@
     max-width: 100%;
   }
 
-  .video-news-detail{
+  .video-news-detail {
     margin: 30px 0;
     width: 100%;
     height: 500px;
+  }
+  @media (max-width: 992px) {
+    html,
+    body {
+      overflow-x: hidden;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .news-columnist .VueCarousel-navigation-next {
+      right: 20px !important;
+    }
+    .news-columnist .VueCarousel-navigation-prev {
+      left: 20px !important;
+    }
+    .video-news-detail{
+      height: 250px;
+    }
   }
 </style>
