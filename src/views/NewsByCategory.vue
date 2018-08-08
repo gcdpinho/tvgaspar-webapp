@@ -1,5 +1,6 @@
 <template>
   <div class="newsByCategory">
+    <p class="text-loader" v-if="loader">Aguarde ...</p>
     <clip-loader :loading="loader" color="white" size="100px"></clip-loader>
     <Navbar :color="color"></Navbar>
     <section id="slider" v-if="category != 'Colunista'">

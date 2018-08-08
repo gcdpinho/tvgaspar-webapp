@@ -1,5 +1,6 @@
 <template>
   <div id="newsById">
+    <p class="text-loader" v-if="loader">Aguarde ...</p>
     <clip-loader :loading="loader" color="white" size="100px"></clip-loader>
     <Navbar :color="color"></Navbar>
     <section id="news-datail" v-if="news">
@@ -10,7 +11,7 @@
         </div>
         <div class="author">
           <p class="bold">{{news.author}}</p>
-          <p>{{news.created_at}}</p>
+          <p>{{$moment(news.created_at).format('DD/MM/YYYY hh:mm')}}</p>
         </div>
         <div v-html="news.body"></div>
       </div>

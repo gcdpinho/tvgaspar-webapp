@@ -1,6 +1,8 @@
 <template>
   <div id="home">
-    <clip-loader :loading="loader" color="white" size="100px"></clip-loader>
+    <p class="text-loader" v-if="loader">Aguarde ...</p>
+    <clip-loader :loading="loader" color="white" size="80px">
+    </clip-loader>
     <Navbar></Navbar>
     <section id="slider">
       <Slider type="news"></Slider>
