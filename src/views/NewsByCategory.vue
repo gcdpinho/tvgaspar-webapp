@@ -9,7 +9,7 @@
       <div class="container">
         <div class="row">
           <div :class="`col-${$mq === 'md' ? 12 : 10}`" :style="allNews.length > 0 ? `--color:${color}` : ''">
-            <div class="row each" v-for="news of allNews" :key="news.id" v-on:click="showNews(news)">
+            <div class="row each" v-for="news of allNews" :key="news.id" v-on:click="showNews(news.id)">
               <div class="col-md-4 text-center">
                 <img class="img-news" v-if="news.images.length > 0" :src="news.images[0].src">
               </div>
@@ -99,8 +99,8 @@
       }
     },
     methods: {
-      showNews: function (news) {
-        this.$router.push({ name: "NewsDetail", params: { category: this.category, news: news } })
+      showNews: function (idNews) {
+        this.$router.push({ name: "NewsById", params: { id: idNews } })
       }
     }
   }

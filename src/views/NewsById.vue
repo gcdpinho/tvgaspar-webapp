@@ -2,7 +2,7 @@
   <div id="newsById">
     <clip-loader :loading="loader" color="white" size="100px"></clip-loader>
     <Navbar :color="color"></Navbar>
-    <section id="news-datail">
+    <section id="news-datail" v-if="news">
       <div class="container">
         <div class="title">
           <h2 class="text-center">{{news.headline}}</h2>
@@ -30,8 +30,7 @@
   export default {
     name: "NewsById",
     props: {
-      category: "",
-      news: undefined
+      id: undefined
     },
     components: {
       Navbar,
@@ -44,21 +43,22 @@
       return {
         loader: true,
         color: "",
+        news: undefined,
         imageTemplate: `<div class="img-news-detail">
                           <img src="src-img" />
                         </div>`,
         videoTemplate: `<div class="video-news-detail">
                           <iframe width="100%" height="100%" src="src-video"></iframe>
                         </div>`
-                        
+
       }
     },
     mounted() {
-      this.$http.post(`${this.$apiURL}/category`, {
-        category: this.category
-      }).then(res => {
-        if (res.data.length > 0)
-          this.color = res.data[0].color;
+      this.$http.get(`${this.$apiURL}/news/${this.id}`).then(res => {
+        this.news = res.data[0];
+        if (this.news.categories.length > 0)
+          this.color = this.news.categories[0].color;
+
         this.changeTags('<video>', '</video>', "video");
         this.changeTags('<img>', '</img>', "image");
       },

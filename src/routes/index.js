@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './../views/Home'
 import NewsByCategory from './../views/NewsByCategory'
-import NewsDetail from './../views/NewsDetail'
+import NewsById from './../views/NewsById'
 
 Vue.use(Router)
 
@@ -19,9 +19,9 @@ export default new Router({
       props: true
     },
     {
-      path: '/NewsDetail',
-      name: 'NewsDetail',
-      component: NewsDetail,
+      path: '/NewsById/:id',
+      name: 'NewsById',
+      component: NewsById,
       props: true
     }
   ]

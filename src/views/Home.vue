@@ -16,7 +16,7 @@
         <div class="inner-news">
           <div class="row" v-for="r in Math.ceil(allNews.length/news_line)" :key="r">
             <div :class="`col col-md-${12/news_line}`" v-for="news of allNews.slice((r-1)*news_line, allNews.length>(r-1)*news_line + news_line ? (r-1)*news_line + news_line : allNews.length)" :key="news.id">
-              <div class="each-news" :style="news.categories.length > 0 ? '--color:'+news.categories[0].color : ''" v-on:click="showNews($event, news, news.categories[0].category)">
+              <div class="each-news" :style="news.categories.length > 0 ? '--color:'+news.categories[0].color : ''" v-on:click="showNews($event, news.id)">
                 <div class="img-news text-center">
                   <img v-if="news.images.length > 0" :src="news.images[0].src">
                   <router-link v-if="news.categories.length > 0" class="category" :to="{path: `/NewsByCategory/${news.categories[0].category}`}">{{news.categories[0].category}}</router-link>
@@ -121,9 +121,9 @@
       );
     },
     methods: {
-      showNews: function (e, news, category) {
+      showNews: function (e, idNews) {
         if (e.target.className != 'category')
-          this.$router.push({ name: "NewsDetail", params: { category: category, news: news } })
+          this.$router.push({ name: "NewsById", params: { id: idNews } })
       }
     }
   }

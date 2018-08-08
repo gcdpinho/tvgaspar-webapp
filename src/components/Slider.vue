@@ -2,7 +2,7 @@
     <div class="app-slider">
         <Carousel v-if="data_slider.length && type =='news'" :perPage="1" :navigationEnabled="true" paginationActiveColor="#9d3138">
             <Slide v-for="news of data_slider" :key="news.id">
-                <div class="news-slider" v-if="news.images.length > 0" :style="`background: url('${news.images[0].src}') center no-repeat`" v-on:mouseup="up($event, news, news.categories[0].category)" v-on:mousedown="down($event)">
+                <div class="news-slider" v-if="news.images.length > 0" :style="`background: url('${news.images[0].src}') center no-repeat`" v-on:mouseup="up($event, news.id)" v-on:mousedown="down($event)">
                     <div class="container">
                         <h2>{{news.headline}}</h2>
                         <p>{{news.subtitle}}</p>
@@ -17,7 +17,7 @@
         </Carousel>
         <Carousel v-if="data_slider.length && type =='news-columnist'" :class="type" :perPage="$mq === 'md' ? 1 : 4" :paginationEnabled="false" :autoplay="false" :autoplayTimeout="5000" :loop="true" :navigationEnabled="true">
             <Slide v-for="news of data_slider" :key="news.id">
-                <div class="each-news" v-bind:style="news.categories.length > 0 ? '--color:'+news.categories[0].color : ''" v-on:mouseup="up($event, news, news.categories[0].category)" v-on:mousedown="down($event)">
+                <div class="each-news" v-bind:style="news.categories.length > 0 ? '--color:'+news.categories[0].color : ''" v-on:mouseup="up($event, news.id)" v-on:mousedown="down($event)">
                     <div class="img-news text-center">
                         <img v-if="news.images.length > 0" :src="news.images[0].src">
                         <span v-if="news.categories.length > 0" class="category">{{news.categories[0].category}}</span>
@@ -132,20 +132,20 @@
             }
         },
         methods: {
-            showNews: function (news, category) {
-                this.$router.push({ name: "NewsDetail", params: { category: category, news: news } })
+            showNews: function (idNews) {
+                this.$router.push({ name: "NewsById", params: { id: idNews } })
             },
             down: function (event) {
                 this.start_point.x = event.screenX;
                 this.start_point.y = event.screenY;
             },
-            up: function (event, news, category) {
+            up: function (event, idNews) {
                 let end_point = {
                     x: event.screenX,
                     y: event.screenY
                 };
                 if (Math.abs(end_point.x - this.start_point.x) < 5)
-                    this.showNews(news, category);
+                    this.showNews(idNews);
             }
 
         }
