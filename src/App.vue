@@ -193,6 +193,27 @@
     font-size: 25px;
     font-weight: bold;
   }
+
+  button:focus,
+  a:focus,
+  input:focus,
+  textarea:focus {
+    outline: none;
+  }
+
+  .form-error{
+    font-size: 12px;
+    font-weight: bold;
+    color: #9d3138;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .form-error i{
+    margin-left: auto;
+  }
+
   @media (max-width: 992px) {
     html,
     body {

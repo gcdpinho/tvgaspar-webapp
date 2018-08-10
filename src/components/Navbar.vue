@@ -4,7 +4,7 @@
       <div class="container">
         <div class="row">
           <div class="col-6">
-            <img class="logo" src="../assets/logo.png">
+            <img class="logo" src="../assets/img/logo.png">
           </div>
           <div class="col-6" id="col-ad">
             <Ad type="topo" :index="0"></Ad>
@@ -38,8 +38,11 @@
             <li>
               <a>TV Indoor</a>
             </li>
-            <li>
-              <a>Institucional</a>
+            <li :class="$route.name == 'Institutional' ? 'active' : ''">
+              <router-link to="/Institutional">Institucional</router-link>
+            </li>
+            <li :class="$route.name == 'Contact' ? 'active' : ''">
+              <router-link to="/Contact">Contato</router-link>
             </li>
           </ul>
         </div>
@@ -51,7 +54,7 @@
           <v-icon class="menu-hamburguer" v-on:click="flg_open = !flg_open">fa fa-bars</v-icon>
         </div>
         <div class="col-6">
-          <img id="img-nav-mobile" src="../assets/logo-white.png">
+          <img id="img-nav-mobile" src="../assets/img/logo-white.png">
         </div>
       </div>
       <div class="background-open-menu" v-if="flg_open" v-on:click="close_menu($event)">
@@ -265,7 +268,7 @@
     #nav-mobile {
       display: block;
     }
-    header{
+    header {
       margin-bottom: 80px;
     }
   }

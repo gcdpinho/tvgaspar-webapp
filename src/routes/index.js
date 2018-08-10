@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import Home from './../views/Home'
 import NewsByCategory from './../views/NewsByCategory'
 import NewsById from './../views/NewsById'
+import Institutional from './../views/Institutional'
+import Contact from './../views/Contact'
 
 Vue.use(Router)
 
@@ -23,6 +25,16 @@ export default new Router({
       name: 'NewsById',
       component: NewsById,
       props: true
+    },
+    {
+      path: '/Institutional',
+      name: 'Institutional',
+      component: Institutional
+    },
+    {
+      path: '/Contact',
+      name: 'Contact',
+      component: Contact
     },
     {
       path: '/NewsByCategory/:category',

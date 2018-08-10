@@ -175,15 +175,20 @@
   .buttons-pagination button {
     background: transparent;
     color: var(--color);
-    border: 1px solid var(--color);
-    font-size: 20px;
+    border: none;
+    font-size: 18px;
     cursor: pointer;
     padding: 5px 15px;
   }
   .buttons-pagination button:hover,
   button.active {
-    color: white;
-    background: var(--color);
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .buttons-pagination button:hover i {
+    font-size: 20px;
+    font-weight: bold;
   }
   button.ant {
     border-radius: 5px 0 0 5px;
