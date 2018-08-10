@@ -222,4 +222,9 @@
       }
     }
   }
+  @media (max-width: 992px) {
+    section {
+      padding: 0 0 30px;
+    }
+  }
 </style>

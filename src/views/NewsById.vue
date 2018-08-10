@@ -72,6 +72,7 @@
     },
     methods: {
       changeTags: function (openTag, closeTag, type) {
+        this.news.body = this.news.body.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
         Promise.all(
           this.news.body.split(openTag).map(element => {
             var e = element.split(closeTag);

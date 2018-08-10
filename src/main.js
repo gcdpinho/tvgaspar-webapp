@@ -16,7 +16,8 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'font-awesome/css/font-awesome.min.css'
 
 Vue.config.productionTip = false
-Vue.prototype.$apiURL = "http://localhost:3000"
+// Vue.prototype.$apiURL = "http://localhost:3000"
+Vue.prototype.$apiURL = "https://tvgaspar-api.herokuapp.com"
 
 Vue.use(BootstrapVue)
 Vue.use(VueAxios, axios)

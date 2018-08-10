@@ -13,7 +13,7 @@ export default new Router({
       component: Home
     },
     {
-      path: '/NewsByCategory/:category',
+      path: '/NewsByCategory/:category/:page',
       name: 'NewsByCategory',
       component: NewsByCategory,
       props: true
@@ -23,6 +23,10 @@ export default new Router({
       name: 'NewsById',
       component: NewsById,
       props: true
+    },
+    {
+      path: '/NewsByCategory/:category',
+      redirect: '/NewsByCategory/:category/1'
     }
   ]
 })
