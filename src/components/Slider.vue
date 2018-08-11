@@ -53,7 +53,9 @@
                 start_point: {
                     x: null,
                     y: null
-                }
+                },
+                limit_news: 3,
+                limit_columnist: 10
             }
         },
         mounted() {
@@ -64,7 +66,7 @@
                             tag: "slider",
                             category: "Colunista"
                         }).then(res => {
-                            this.data_slider = res.data;
+                            this.data_slider = res.data.slice(0, this.limit_news);
                             this.data_slider.map(news =>
                                 news.images.map(image =>
                                     firebase.storage().ref().child(`imagens/${image.src}`).getDownloadURL()
@@ -115,7 +117,7 @@
                         tag: "slider",
                         category: 'Colunista'
                     }).then(res => {
-                        this.data_slider = res.data;
+                        this.data_slider = res.data.slice(0, this.limit_columnist);
                         this.data_slider.map(news =>
                             news.images.map(image =>
                                 firebase.storage().ref().child(`imagens/${image.src}`).getDownloadURL()
