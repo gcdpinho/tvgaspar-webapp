@@ -17,11 +17,11 @@
             <li :class="$route.name == 'Home' ? 'active' : ''">
               <router-link to="/">Home</router-link>
             </li>
-            <li>
+            <!-- <li>
               <a>Mega Menu</a>
-            </li>
+            </li> -->
             <li :class="$route.name == 'NewsByCategory' ? 'active' : ''">
-              <a class="bt-menu-dropdown" v-on:click="news.show = !news.show">Notícias
+              <a class="bt-menu-dropdown news" v-on:click="news.show = !news.show">Notícias
                 <v-icon>fa fa-chevron-down</v-icon>
               </a>
               <div class="menu-dropdown" v-if="news.show">
@@ -32,11 +32,20 @@
                 </ul>
               </div>
             </li>
-            <li>
-              <a>Ao Vivo</a>
+            <li :class="$route.name == 'Live' ? 'active' : ''">
+              <a class="bt-menu-dropdown live" v-on:click="live.show = !live.show">Ao Vivo
+                <v-icon>fa fa-chevron-down</v-icon>
+              </a>
+              <div class="menu-dropdown" v-if="live.show">
+                <ul>
+                  <li class="item-menu" v-for="cam of live.cams" :key="cam.id">
+                    <router-link :to="{name: 'Live', params: {id: cam.id}}">{{cam.name}}</router-link>
+                  </li>
+                </ul>
+              </div>
             </li>
-            <li>
-              <a>TV Indoor</a>
+            <li :class="$route.name == 'TVIndoor' ? 'active' : ''">
+              <router-link to="/TVIndoor">TV Indoor</router-link>
             </li>
             <li :class="$route.name == 'Institutional' ? 'active' : ''">
               <router-link to="/Institutional">Institucional</router-link>
@@ -62,9 +71,9 @@
           <div class="item-menu-mobile">
             <router-link to="/">Home</router-link>
           </div>
-          <div class="item-menu-mobile">
+          <!-- <div class="item-menu-mobile">
             <a>Mega Menu</a>
-          </div>
+          </div> -->
           <div class="item-menu-mobile">
             <a v-on:click="news_mobile_flg = !news_mobile_flg" :style="news_mobile_flg ? 'padding-bottom: 10px' : ''">Notícias
               <v-icon v-if="!news_mobile_flg">fa fa-chevron-down</v-icon>
@@ -109,14 +118,29 @@
           categories: [],
         },
         flg_open: false,
-        news_mobile_flg: false
+        news_mobile_flg: false,
+        live: {
+          show: false,
+          cams: [
+            { id: 0, name: 'Avenida das Comunidades nr 310', src: 'https://camerite.com/embed/4514/santa-catarina/gaspar/avenida-das-comunidades-310?autoplay=true&amp;sound=true' },
+            { id: 1, name: 'Nereu Ramos nr 110', src: 'https://camerite.com/embed/3176/parana/pontal-do-parana/rua-dr-nereu-ramos-n-110?autoplay=true&amp;sound=true' },
+            { id: 2, name: 'Rua São José', src: 'https://camerite.com/embed/45092/undefined/undefined/rua-sao-jose-253?autoplay=true&amp;sound=true' },
+            { id: 3, name: 'Praça Getúlio Vargas', src: 'https://camerite.com/embed/3172/santa-catarina/gaspar/praca-getulio-vargas?autoplay=true&amp;sound=true' },
+            { id: 4, name: 'Ponte Hercílio Decke', src: 'https://camerite.com/embed/45502/undefined/undefined/ponte-hercilio-deeke?autoplay=true&amp;sound=true' },
+            { id: 5, name: 'Viaduto Avenida', src: 'https://camerite.com/embed/3193/santa-catarina/gaspar/avenida-das-comunidades-20?autoplay=true&sound=true' },
+          ]
+        }
       }
     },
     mounted() {
       var self = this;
       window.addEventListener('click', function (e) {
-        if (e.target.className != 'item-menu' && e.target.className != 'bt-menu-dropdown')
+        if (e.target.className != 'item-menu' && e.target.className != 'bt-menu-dropdown news')
           self.news.show = false;
+        else if (e.target.className != 'item-menu' && e.target.className != 'bt-menu-dropdown live') {
+          self.live.show = false;
+        }
+
       })
       this.$http.get(`${this.$apiURL}/category`)
         .then(res => {

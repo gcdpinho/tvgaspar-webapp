@@ -198,10 +198,10 @@
   a:focus,
   input:focus,
   textarea:focus {
-    outline: none;
+    outline: none !important;
   }
 
-  .form-error{
+  .form-error {
     font-size: 12px;
     font-weight: bold;
     color: #9d3138;
@@ -210,7 +210,7 @@
     align-items: center;
   }
 
-  .form-error i{
+  .form-error i {
     margin-left: auto;
   }
 
@@ -241,11 +241,6 @@
       .text-loader {
         top: 30%;
       }
-    }
-  }
-  @media (max-width: 992px) {
-    section {
-      padding: 0 0 30px;
     }
   }
 </style>

@@ -92,7 +92,7 @@
         loader: true,
         lines_ad: 2,
         news_line: 3,
-        limit: 20
+        limit: 24
       };
     },
     mounted() {
@@ -158,4 +158,5 @@
     background-color: white;
     color: #0e0e0e;
   }
+
 </style>

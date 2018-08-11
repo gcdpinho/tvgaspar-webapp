@@ -18,7 +18,7 @@
               <div class="item">
                 <v-icon>fa fa-map-marker</v-icon>
                 <span>Endereço:</span>
-                Rua São José, 254 - Atitude Centro Empresarial 4º andar - Sala 407 - Centro - Gaspar
+                Rua São José, 253 - Atitude Centro Empresarial 4º andar - Sala 407 - Centro - Gaspar
               </div>
               <div class="item">
                 <v-icon>fa fa-phone</v-icon>
@@ -287,10 +287,8 @@
     color: #9d3138;
     font-weight: bold;
   }
-  @media (max-width: 992px) {
-    section {
-      padding: 30px 0;
-    }
+  section {
+    padding: 30px 0;
   }
 
   @media (max-width: 767px) {
