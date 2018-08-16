@@ -11,7 +11,8 @@
                 <div class="row">
                     <div :class="`col-md-${12/img_row}`" v-for="img of tv_indoor" :key="img.id">
                         <div class="item-img">
-                            <img :src="`tvindoor/${img.src}`">
+                            <!-- <img :src="`tvindoor/${img.src}`"> -->
+                            <img :src="require(`@/assets/img/tvindoor/${img.src}`)">
                             <p class="title">{{img.name}}</p>
                         </div>
                     </div>

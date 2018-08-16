@@ -86,7 +86,15 @@
             </ul>
           </div>
           <div class="item-menu-mobile">
-            <a>Ao Vivo</a>
+            <a v-on:click="live_mobile_flg = !live_mobile_flg" :style="live_mobile_flg ? 'padding-bottom: 10px' : ''">Ao Vivo
+              <v-icon v-if="!live_mobile_flg">fa fa-chevron-down</v-icon>
+              <v-icon v-if="live_mobile_flg">fa fa-chevron-up</v-icon>
+            </a>
+            <ul v-if="live_mobile_flg">
+              <li class="inner-item-menu-mobile" v-for="cam of live.cams" :key="cam.id">
+                <router-link :to="{name: 'Live', params: {id: cam.id}}">{{cam.name}}</router-link>
+              </li>
+            </ul>
           </div>
           <div class="item-menu-mobile">
             <a>TV Indoor</a>
@@ -111,28 +119,7 @@
     components: {
       Ad
     },
-    data() {
-      return {
-        news: {
-          show: false,
-          categories: [],
-        },
-        flg_open: false,
-        news_mobile_flg: false,
-        live: {
-          show: false,
-          cams: [
-            { id: 0, name: 'Avenida das Comunidades nr 310', src: 'https://camerite.com/embed/4514/santa-catarina/gaspar/avenida-das-comunidades-310?autoplay=true&amp;sound=true' },
-            { id: 1, name: 'Nereu Ramos nr 110', src: 'https://camerite.com/embed/3176/parana/pontal-do-parana/rua-dr-nereu-ramos-n-110?autoplay=true&amp;sound=true' },
-            { id: 2, name: 'Rua São José', src: 'https://camerite.com/embed/45092/undefined/undefined/rua-sao-jose-253?autoplay=true&amp;sound=true' },
-            { id: 3, name: 'Praça Getúlio Vargas', src: 'https://camerite.com/embed/3172/santa-catarina/gaspar/praca-getulio-vargas?autoplay=true&amp;sound=true' },
-            { id: 4, name: 'Ponte Hercílio Decke', src: 'https://camerite.com/embed/45502/undefined/undefined/ponte-hercilio-deeke?autoplay=true&amp;sound=true' },
-            { id: 5, name: 'Viaduto Avenida', src: 'https://camerite.com/embed/3193/santa-catarina/gaspar/avenida-das-comunidades-20?autoplay=true&sound=true' },
-          ]
-        }
-      }
-    },
-    mounted() {
+    beforeMount() {
       var self = this;
       window.addEventListener('click', function (e) {
         if (e.target.className != 'item-menu' && e.target.className != 'bt-menu-dropdown news')
@@ -151,6 +138,28 @@
             console.log(err);
           }
         );
+    },
+    data() {
+      return {
+        news: {
+          show: false,
+          categories: [],
+        },
+        flg_open: false,
+        news_mobile_flg: false,
+        live_mobile_flg: false,
+        live: {
+          show: false,
+          cams: [
+            { id: 0, name: 'Avenida das Comunidades nr 310', src: 'https://camerite.com/embed/4514/santa-catarina/gaspar/avenida-das-comunidades-310?autoplay=true&amp;sound=true' },
+            { id: 1, name: 'Nereu Ramos nr 110', src: 'https://camerite.com/embed/3176/parana/pontal-do-parana/rua-dr-nereu-ramos-n-110?autoplay=true&amp;sound=true' },
+            { id: 2, name: 'Rua São José', src: 'https://camerite.com/embed/45092/undefined/undefined/rua-sao-jose-253?autoplay=true&amp;sound=true' },
+            { id: 3, name: 'Praça Getúlio Vargas', src: 'https://camerite.com/embed/3172/santa-catarina/gaspar/praca-getulio-vargas?autoplay=true&amp;sound=true' },
+            { id: 4, name: 'Ponte Hercílio Decke', src: 'https://camerite.com/embed/45502/undefined/undefined/ponte-hercilio-deeke?autoplay=true&amp;sound=true' },
+            { id: 5, name: 'Viaduto Avenida', src: 'https://camerite.com/embed/3193/santa-catarina/gaspar/avenida-das-comunidades-20?autoplay=true&sound=true' },
+          ]
+        }
+      }
     },
     methods: {
       close_menu: function (event) {
@@ -249,7 +258,8 @@
   }
   .inner-menu-hamburguer {
     background-color: white;
-    height: 100%;
+    height: calc(100% - 80px);
+    overflow-y: auto;
     position: fixed;
     width: 50%;
     padding: 15px;
@@ -284,6 +294,9 @@
   .item-menu-mobile ul {
     padding: 10px 0;
     border-top: 1px solid var(--color);
+  }
+  #nav-mobile li a{
+    padding: 10px 0;
   }
   @media (max-width: 992px) {
     #nav-desk {
