@@ -88,17 +88,17 @@
     color: white;
     margin-bottom: 20px;
   }
-  .mobile{
+  .mobile {
     display: none;
   }
-  @media (max-width: 767px){
-    .mobile{
+  @media (max-width: 767px) {
+    .mobile {
       display: block;
     }
-    .desk{
+    .desk {
       display: none;
     }
-    iframe{
+    iframe {
       height: auto;
     }
   }

@@ -47,7 +47,7 @@
     height: 100px;
     background-size: 100% 100% !important;
   }
-  .ad.body{
+  .ad.body {
     height: 150px;
   }
   .ad:hover {
@@ -60,13 +60,13 @@
     height: 100%;
     padding: 20px;
     color: white;
-    background: rgba(0,0,0,0.2);
+    background: rgba(0, 0, 0, 0.2);
   }
   .ad p {
     margin: auto;
     line-height: 1;
   }
-  .ad.vertical{
+  .ad.vertical {
     height: 400px;
   }
 </style>

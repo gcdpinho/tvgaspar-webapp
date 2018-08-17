@@ -112,12 +112,12 @@
     align-items: center;
   }
 
-  .body-text{
+  .body-text {
     margin-top: 30px;
     text-align: center;
   }
 
-  .body-text img{
+  .body-text img {
     max-width: 600px;
     width: 100%;
     margin: 15px auto;
