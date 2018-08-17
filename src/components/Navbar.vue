@@ -4,7 +4,22 @@
       <div class="container">
         <div class="row">
           <div class="col-6">
-            <img class="logo" src="../assets/img/logo.png">
+            <div class="row">
+              <div class="col-6">
+                <img class="logo" src="../assets/img/logo.png">
+              </div>
+              <div class="col-6 date-temperature">
+                <div class="row" v-if="this.adivisor.data != null">
+                  <p>{{$moment(this.adivisor.data.date).format('dddd[,] LL')}} - {{this.adivisor.data.temperature}}°C</p>
+                  <div class="social-midia" :style="color == undefined || color == '' || color == null ? '--color: #9d3138': '--color:'+ color">
+                    <v-icon>fa fa-facebook-square</v-icon>
+                    <v-icon>fa fa-twitter-square</v-icon>
+                    <v-icon>fa fa-youtube</v-icon>
+                    <v-icon>fa fa-instagram</v-icon>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="col-6" id="col-ad">
             <Ad type="topo"></Ad>
@@ -128,6 +143,12 @@
         flg_open: false,
         news_mobile_flg: false,
         live_mobile_flg: false,
+        adivisor: {
+          id: 4924,
+          token: '4a68aeda540f867c2d1171bad0d885bf',
+          url: 'http://apiadvisor.climatempo.com.br/api/v1/weather/locale',
+          data: null
+        },
         live: {
           show: false,
           cams: [
@@ -142,6 +163,7 @@
       }
     },
     mounted() {
+      this.$moment.locale('pt-br')
       var self = this;
       window.addEventListener('click', function (e) {
         if (e.target.className != 'item-menu' && e.target.className != 'bt-menu-dropdown news')
@@ -149,8 +171,17 @@
         else if (e.target.className != 'item-menu' && e.target.className != 'bt-menu-dropdown live') {
           self.live.show = false;
         }
-
-      })
+      });
+      this.$http.get(`${this.adivisor.url}/${this.adivisor.id}/current?token=${this.adivisor.token}`)
+        .then(res => {
+          this.adivisor.data = res.data.data;
+          console.log(this.adivisor.data);
+        },
+          err => {
+            // eslint-disable-next-line
+            console.log(err);
+          }
+        );
       this.$http.get(`${this.$apiURL}/category`)
         .then(res => {
           this.news.categories = res.data;
@@ -298,6 +329,35 @@
   #nav-mobile li a {
     padding: 10px 0;
   }
+
+  .date-temperature {
+    display: flex;
+    align-items: center;
+  }
+
+  .date-temperature .row,
+  .date-temperature p {
+    width: 100%;
+  }
+  .date-temperature p {
+    margin-bottom: 10px;
+  }
+  .social-midia i {
+    font-size: 20px;
+    margin-left: 5px;
+    cursor: pointer;
+  }
+  .social-midia i:hover {
+    color: var(--color);
+  }
+  .social-midia i:first-child {
+    margin-left: auto !important;
+  }
+
+  .social-midia i:last-child {
+    margin-right: auto;
+  }
+
   @media (max-width: 992px) {
     #nav-desk {
       display: none;

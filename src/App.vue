@@ -161,7 +161,7 @@
     padding-bottom: 30px;
   }
   .horizontal-ad {
-    max-width: 728px;
+    /* max-width: 728px; */
     margin: auto;
   }
   #columnist .each-news {
