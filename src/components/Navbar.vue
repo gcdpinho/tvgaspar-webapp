@@ -163,7 +163,7 @@
       }
     },
     mounted() {
-      this.$moment.locale('pt-br')
+      this.$moment.locale('pt-br');
       var self = this;
       window.addEventListener('click', function (e) {
         if (e.target.className != 'item-menu' && e.target.className != 'bt-menu-dropdown news')
@@ -175,7 +175,6 @@
       this.$http.get(`${this.adivisor.url}/${this.adivisor.id}/current?token=${this.adivisor.token}`)
         .then(res => {
           this.adivisor.data = res.data.data;
-          console.log(this.adivisor.data);
         },
           err => {
             // eslint-disable-next-line
