@@ -295,7 +295,7 @@
     padding: 10px 0;
     border-top: 1px solid var(--color);
   }
-  #nav-mobile li a{
+  #nav-mobile li a {
     padding: 10px 0;
   }
   @media (max-width: 992px) {
