@@ -21,7 +21,7 @@
             </div>
           </div>
           <div class="col-2" v-if="allNews.length > 0 && $mq != 'md'">
-            <Ad type="vertical" :index="0"></Ad>
+            <Ad type="vertical"></Ad>
           </div>
           <div class="col-12 text-center buttons-pagination" v-if="allNews.length > 0 && this.news_page < allNews.length" :style="allNews.length > 0 ? `--color:${color}` : ''">
             <button v-on:click="newPage('previous')" class="ant">

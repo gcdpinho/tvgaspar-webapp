@@ -1,6 +1,6 @@
 <template>
   <div class="app-slider">
-    <Carousel v-if="data_slider.length && type =='news'" :perPage="1" :navigationEnabled="true" paginationActiveColor="#9d3138">
+    <Carousel v-if="data_slider.length && type =='news'" :perPage="1" :navigationEnabled="true" paginationActiveColor="#9d3138" :autoplay="true" :autoplayTimeout="5000" :loop="true">
       <Slide v-for="news of data_slider" :key="news.id">
         <div class="news-slider" v-if="news.images.length > 0" :style="`background: url('${news.images[0].src}') center no-repeat`" v-on:mouseup="up($event, news.id)" v-on:mousedown="down($event)">
           <div class="container">

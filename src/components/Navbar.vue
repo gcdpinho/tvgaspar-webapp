@@ -7,7 +7,7 @@
             <img class="logo" src="../assets/img/logo.png">
           </div>
           <div class="col-6" id="col-ad">
-            <Ad type="topo" :index="0"></Ad>
+            <Ad type="topo"></Ad>
           </div>
         </div>
       </div>
@@ -119,26 +119,6 @@
     components: {
       Ad
     },
-    beforeMount() {
-      var self = this;
-      window.addEventListener('click', function (e) {
-        if (e.target.className != 'item-menu' && e.target.className != 'bt-menu-dropdown news')
-          self.news.show = false;
-        else if (e.target.className != 'item-menu' && e.target.className != 'bt-menu-dropdown live') {
-          self.live.show = false;
-        }
-
-      })
-      this.$http.get(`${this.$apiURL}/category`)
-        .then(res => {
-          this.news.categories = res.data;
-        },
-          err => {
-            // eslint-disable-next-line
-            console.log(err);
-          }
-        );
-    },
     data() {
       return {
         news: {
@@ -160,6 +140,26 @@
           ]
         }
       }
+    },
+    mounted() {
+      var self = this;
+      window.addEventListener('click', function (e) {
+        if (e.target.className != 'item-menu' && e.target.className != 'bt-menu-dropdown news')
+          self.news.show = false;
+        else if (e.target.className != 'item-menu' && e.target.className != 'bt-menu-dropdown live') {
+          self.live.show = false;
+        }
+
+      })
+      this.$http.get(`${this.$apiURL}/category`)
+        .then(res => {
+          this.news.categories = res.data;
+        },
+          err => {
+            // eslint-disable-next-line
+            console.log(err);
+          }
+        );
     },
     methods: {
       close_menu: function (event) {

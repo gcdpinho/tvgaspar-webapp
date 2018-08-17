@@ -11,12 +11,12 @@
   export default {
     name: "Ad",
     props: {
-      type: "",
-      index: 0
+      type: ""
     },
     data() {
       return {
-        ad: null
+        ad: null,
+        index: 0
       }
     },
     mounted() {
@@ -24,6 +24,7 @@
         type: this.type
       }).then(
         res => {
+          this.index = Math.floor(Math.random() * (res.data.length - 1));
           if (res.data[this.index])
             firebase.storage().ref().child('imagens/' + res.data[this.index].image.src).getDownloadURL()
               .then(img => {
@@ -47,7 +48,8 @@
     height: 100px;
     background-size: 100% 100% !important;
   }
-  .ad.body {
+  /* .ad.body, */
+  .ad.horizontal {
     height: 150px;
   }
   .ad:hover {

@@ -31,7 +31,8 @@
               </div>
             </div>
             <div v-if="r%lines_ad == 0" class="horizontal-ad col col-12">
-              <Ad type="horizontal" :index="r/lines_ad-1"></Ad>
+              <Ad type="horizontal"></Ad>
+              <!-- <Ad type="horizontal" :index="r/lines_ad-1"></Ad> -->
             </div>
           </div>
         </div>
@@ -51,7 +52,7 @@
     <section id="gallery-videos">
       <Gallery type="videos"></Gallery>
     </section>
-    <Ad type="body" :index="0"></Ad>
+    <Ad type="horizontal"></Ad>
     <section id="columnist">
       <div class="container">
         <div class="header">
