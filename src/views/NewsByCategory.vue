@@ -22,6 +22,7 @@
           </div>
           <div class="col-3" v-if="allNews.length > 0 && $mq != 'md'">
             <Ad type="vertical"></Ad>
+            <Highlights></Highlights>
           </div>
           <div class="col-12 text-center buttons-pagination" v-if="allNews.length > 0 && this.news_page < allNews.length" :style="allNews.length > 0 ? `--color:${color}` : ''">
             <button v-on:click="newPage('previous')" class="ant">
@@ -45,6 +46,7 @@
   import Navbar from "./../components/Navbar.vue";
   import Footer from "./../components/Footer.vue";
   import Slider from "./../components/Slider.vue";
+  import Highlights from "./../components/Highlights.vue";
   import Ad from "./../components/Ad.vue";
   import firebase from 'firebase';
   import ClipLoader from 'vue-spinner/src/ClipLoader.vue';
@@ -60,7 +62,8 @@
       Footer,
       Slider,
       ClipLoader,
-      Ad
+      Ad,
+      Highlights
     },
     data() {
       return {

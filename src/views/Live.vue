@@ -5,7 +5,15 @@
     <Navbar></Navbar>
     <section>
       <div class="container">
-        <iframe width="100%" height="500px" :src="cams[id].src"></iframe>
+        <div class="row">
+          <div class="col-9">
+          <iframe width="100%" height="400px" :src="cams[id].src"></iframe>
+          </div>
+          <div class="col-3">
+            <Ad type="vertical"></Ad>
+            <Highlights></Highlights>
+          </div>
+        </div>
       </div>
     </section>
     <Footer></Footer>
@@ -16,7 +24,9 @@
 <script>
   import Navbar from "./../components/Navbar.vue";
   import Footer from "./../components/Footer.vue";
+  import Highlights from "./../components/Highlights.vue";
   import ClipLoader from 'vue-spinner/src/ClipLoader.vue';
+  import Ad from "./../components/Ad.vue";
 
   export default {
     name: "Live",
@@ -26,7 +36,9 @@
     components: {
       Navbar,
       Footer,
-      ClipLoader
+      ClipLoader,
+      Ad,
+      Highlights
     },
     data() {
       return {
