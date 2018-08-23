@@ -7,6 +7,10 @@
     <section id="slider">
       <Slider type="news"></Slider>
     </section>
+    <Ad type="horizontal"></Ad>
+    <section id="gallery-videos">
+      <Gallery type="videos"></Gallery>
+    </section>
     <section id="news">
       <div class="container">
         <div class="header">
@@ -49,10 +53,6 @@
         <Slider type="images"></Slider>
       </div>
     </section>
-    <section id="gallery-videos">
-      <Gallery type="videos"></Gallery>
-    </section>
-    <Ad type="horizontal"></Ad>
     <section id="columnist">
       <div class="container">
         <div class="header">

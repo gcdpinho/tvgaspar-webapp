@@ -28,7 +28,7 @@
           if (res.data[this.index])
             firebase.storage().ref().child('imagens/' + res.data[this.index].image.src).getDownloadURL()
               .then(img => {
-                res.data[this.index].image.src = img
+                res.data[this.index].image.src = img;
                 this.ad = res.data[this.index];
               });
         },

@@ -1,5 +1,5 @@
 <template>
-  <div class="inner-destaque">
+  <div class="inner-destaque" v-if="news_destaque != undefined">
     <p class="title-destaques">Destaques</p>
     <div class="row each-destaque" v-for="destaque of news_destaque" :key="destaque.id" v-on:click="showNews($event, destaque.id)" :style="destaque.categories.length > 0 ? `--color:${destaque.categories[0].color}` : '--color: #9d3138'">
       <div class="container-img">

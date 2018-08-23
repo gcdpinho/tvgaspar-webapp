@@ -87,7 +87,7 @@
   .inner-news .col {
     margin-bottom: 30px;
   }
-  #news {
+  #news, #columnist {
     background-color: #ececed;
   }
   .each-news {
