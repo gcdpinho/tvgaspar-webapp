@@ -69,6 +69,6 @@
     line-height: 1;
   }
   .ad.vertical {
-    height: 400px;
+    height: 250px;
   }
 </style>

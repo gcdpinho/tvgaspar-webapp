@@ -9,7 +9,7 @@
     <section id="news-vertical">
       <div class="container">
         <div class="row">
-          <div :class="`col-${$mq === 'md' ? 12 : 10}`" :style="allNews.length > 0 ? `--color:${color}` : ''">
+          <div :class="`col-${$mq === 'md' ? 12 : 9}`" :style="allNews.length > 0 ? `--color:${color}` : ''">
             <div class="row each" v-for="news of newsPerPage()" :key="news.id" v-on:click="showNews(news.id)">
               <div class="col-md-4 text-center">
                 <img class="img-news" v-if="news.images.length > 0" :src="news.images[0].src">
@@ -20,7 +20,7 @@
               </div>
             </div>
           </div>
-          <div class="col-2" v-if="allNews.length > 0 && $mq != 'md'">
+          <div class="col-3" v-if="allNews.length > 0 && $mq != 'md'">
             <Ad type="vertical"></Ad>
           </div>
           <div class="col-12 text-center buttons-pagination" v-if="allNews.length > 0 && this.news_page < allNews.length" :style="allNews.length > 0 ? `--color:${color}` : ''">

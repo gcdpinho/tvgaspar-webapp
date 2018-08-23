@@ -84,7 +84,7 @@
               tag: "slider",
               category: this.category
             }).then(res => {
-              this.data_slider = res.data;
+              this.data_slider = res.data.slice(0, this.limit_news);
               this.data_slider.map(news =>
                 news.images.map(image =>
                   firebase.storage().ref().child(`imagens/${image.src}`).getDownloadURL()
