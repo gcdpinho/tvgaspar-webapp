@@ -5,15 +5,23 @@
     <Navbar></Navbar>
     <section>
       <div class="container">
-        <div class="row">
-          <p>Através de um sistema inovador, a TV Gaspar agora leva sua programação para vários monitores espalhados pela cidade, em locais de grande fluxo de pessoas, dando mais visibilidade ao conteúdo e aos anunciantes.<br><br> São parceiros do TV Gaspar Indoor:</p>
+        <div class="row row-text">
+          <p>A TV Gaspar conta com 20 TVs instaladas em diversos segmentos comerciais na cidade, onde leva informação e conteúdo, de uma forma rápida e direta. Uma alternativa muito eficiente e moderna para quem deseja anunciar em Gaspar.</p>
         </div>
         <div class="row">
-          <div :class="`col-md-${12/img_row}`" v-for="img of tv_indoor" :key="img.id">
-            <div class="item-img">
-              <img :src="require(`@/assets/img/tvindoor/${img.src}`)">
-              <p class="title">{{img.name}}</p>
+          <div class="col-md-6">
+            <div class="row row-tv">
+              <div :class="`col-md-${12/tv_row} col-tv`" v-for="tv of tv_indoor" :key="tv.id">
+                <div class="img-tv">
+                  <v-icon>fa fa-tv</v-icon>
+                  <p :class="tv.id+1 > 9 ? 'two':''">{{tv.id+1}}</p>
+                </div>
+                <p class="title">{{tv.name}}</p>
+              </div>
             </div>
+          </div>
+          <div class="col-md-6">
+            <img src="../assets/img/cartaz_tv_indoor.jpg">
           </div>
         </div>
       </div>
@@ -38,23 +46,28 @@
     data() {
       return {
         loader: false,
-        img_row: 3,
+        tv_row: 2,
         tv_indoor: [
-          { id: 0, name: 'Like Acqua Academia', number: '32', src: '0.jpg' },
-          { id: 1, name: 'Like Fitness (centro)', number: '32', src: '1.jpg' },
-          { id: 2, name: 'Mercado Reinert', number: '32', src: '2.jpg' },
-          { id: 3, name: 'H. Bertoldi', number: '32', src: '3.jpg' },
-          { id: 4, name: 'Pão de Mel', number: '32', src: '4.jpg' },
-          { id: 5, name: 'Padaria Qui Delícia', number: '32', src: '5.jpg' },
-          { id: 6, name: 'Lanches Beira Rio', number: '32', src: '6.jpg' },
-          { id: 7, name: 'Supermercado Goedert', number: '52', src: '7.jpg' },
-          { id: 8, name: 'Xodó Som', number: '42', src: '8.jpg' },
-          { id: 9, name: 'Clínica Dentária União', number: '32', src: '9.jpg' },
-          { id: 10, name: 'Auto Posto Julinho (Av das Comunidades)', number: '32', src: '10.jpg' },
-          { id: 11, name: 'Restaurante Deck Gourmet', number: '43', src: '11.jpg' },
-          { id: 12, name: 'Restaurante Questão de Gosto', number: '40', src: '12.jpg' },
-          // { id: 13, name: 'Panificadora e Confeitaria, Coração do Vale', number: '32', src: '' },
-          // { id: 14, name: ' Laboratório Reference', number: '26', src: '' },
+          { id: 0, name: 'Academia Like Acqua' },
+          { id: 1, name: 'Academia Like Fitness' },
+          { id: 2, name: 'Auto Posto Julinho' },
+          { id: 3, name: 'Auto Posto Testoni' },
+          { id: 4, name: 'Churrascaria Toni' },
+          { id: 5, name: 'Clínica Dentária União' },
+          { id: 6, name: 'Dietrch Mat. De Constr.' },
+          { id: 7, name: 'Laboratório Reference' },
+          { id: 8, name: 'Mercado Reinert' },
+          { id: 9, name: 'Moendão Cachaçaria' },
+          { id: 10, name: 'Motec Moto Peças' },
+          { id: 11, name: 'Padaria Coração do Vale' },
+          { id: 12, name: 'Padaria Pão De Mel' },
+          { id: 13, name: 'Padaria Qui Delicia' },
+          { id: 14, name: 'Restaurante Beira Rio' },
+          { id: 15, name: 'Restaurante Estação' },
+          { id: 16, name: 'Restaurante H. Bertoldi' },
+          { id: 17, name: 'Restaurante Questão de Gosto' },
+          { id: 18, name: 'Restaurante Raul\'s' },
+          { id: 19, name: 'Xodó Som' },
         ]
       }
     }
@@ -69,21 +82,39 @@
   }
   img {
     width: 100%;
-    height: 195px;
   }
   .title {
-    text-align: center;
+    display: inline-block;
     font-weight: 500;
-    margin-top: 10px;
+    margin-bottom: 0;
+    margin-left: 10px;
   }
-  .item-img {
-    cursor: pointer;
+  .col-tv {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
   }
-  .item-img:hover img {
-    opacity: 0.9;
+  .row-tv,
+  .row-text {
+    margin-bottom: 15px;
   }
-  .item-img:hover p {
-    color: #9d3138;
+  .img-tv {
+    display: inline-block;
+    position: relative;
+  }
+  .img-tv i {
+    font-size: 40px;
+  }
+  .img-tv p {
+    margin-bottom: 0;
+    position: absolute;
+    font-weight: 500;
+    top: calc(50% - 14px);
+    left: calc(50% - 5px);
+  }
+
+  .img-tv p.two {
+    left: calc(50% - 9px);
   }
 </style>
 
