@@ -12,7 +12,7 @@
                 <div class="row" v-if="this.adivisor.data != null">
                   <p>{{$moment(this.adivisor.data.date).format('dddd[,] LL')}} - {{this.adivisor.data.temperature}}°C</p>
                   <div class="social-midia" :style="color == undefined || color == '' || color == null ? '--color: #9d3138': '--color:'+ color">
-                    <a href="https://www.facebook.com/tvgasparoficial/" target="_blank">
+                    <a href="https://www.facebook.com/tvgasparoficial" target="_blank">
                       <v-icon>fa fa-facebook-square</v-icon>
                     </a>
                     <a href="https://twitter.com/TVGaspar?s=17" target="_blank">
@@ -21,7 +21,7 @@
                     <a href="https://www.youtube.com/user/canalgaspar" target="_blank">
                       <v-icon>fa fa-youtube</v-icon>
                     </a>
-                    <a href="https://www.instagram.com/tvgaspar/" target="_blank">
+                    <a href="https://www.instagram.com/tvgaspar" target="_blank">
                       <v-icon>fa fa-instagram</v-icon>
                     </a>
                   </div>
@@ -212,6 +212,7 @@
   .logo {
     width: 100%;
     max-width: 150px;
+    margin-top: 15px;
   }
   #col-ad {
     display: flex;
