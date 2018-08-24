@@ -12,10 +12,18 @@
                 <div class="row" v-if="this.adivisor.data != null">
                   <p>{{$moment(this.adivisor.data.date).format('dddd[,] LL')}} - {{this.adivisor.data.temperature}}°C</p>
                   <div class="social-midia" :style="color == undefined || color == '' || color == null ? '--color: #9d3138': '--color:'+ color">
-                    <v-icon>fa fa-facebook-square</v-icon>
-                    <v-icon>fa fa-twitter-square</v-icon>
-                    <v-icon>fa fa-youtube</v-icon>
-                    <v-icon>fa fa-instagram</v-icon>
+                    <a href="https://www.facebook.com/tvgasparoficial/" target="_blank">
+                      <v-icon>fa fa-facebook-square</v-icon>
+                    </a>
+                    <a href="https://twitter.com/TVGaspar?s=17" target="_blank">
+                      <v-icon>fa fa-twitter-square</v-icon>
+                    </a>
+                    <a href="https://www.youtube.com/user/canalgaspar" target="_blank">
+                      <v-icon>fa fa-youtube</v-icon>
+                    </a>
+                    <a href="https://www.instagram.com/tvgaspar/" target="_blank">
+                      <v-icon>fa fa-instagram</v-icon>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -146,7 +154,7 @@
         adivisor: {
           id: 4924,
           token: '4a68aeda540f867c2d1171bad0d885bf',
-          url: 'http://apiadvisor.climatempo.com.br/api/v1/weather/locale',
+          url: 'https://apiadvisor.climatempo.com.br/api/v1/weather/locale',
           data: null
         },
         live: {
@@ -341,19 +349,20 @@
   .date-temperature p {
     margin-bottom: 10px;
   }
-  .social-midia i {
+  .social-midia a {
     font-size: 20px;
     margin-left: 5px;
     cursor: pointer;
+    color: inherit;
   }
-  .social-midia i:hover {
+  .social-midia a:hover {
     color: var(--color);
   }
-  .social-midia i:first-child {
+  .social-midia a:first-child {
     margin-left: auto !important;
   }
 
-  .social-midia i:last-child {
+  .social-midia a:last-child {
     margin-right: auto;
   }
 
