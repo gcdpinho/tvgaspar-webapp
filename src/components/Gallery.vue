@@ -37,7 +37,8 @@
     data() {
       return {
         data_gallery: [],
-        first_data_gallery: null
+        first_data_gallery: null,
+        limit: 5
       }
     },
     mounted() {
@@ -47,7 +48,7 @@
             tag: 'slider'
           }).then(res => {
             this.first_data_gallery = res.data[0];
-            this.data_gallery = res.data.slice(1);
+            this.data_gallery = res.data.slice(1, this.limit);
           }, err => {
             // eslint-disable-next-line
             console.log(err);
