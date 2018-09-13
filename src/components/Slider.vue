@@ -1,8 +1,8 @@
 <template>
   <div class="app-slider">
-    <Carousel v-if="data_slider.length && type =='news'" :perPage="1" :navigationEnabled="true" paginationActiveColor="#9d3138" :autoplay="true" :autoplayTimeout="5000" :loop="true">
+    <Carousel v-if="data_slider.length && type =='news'" :perPage="1" :navigationEnabled="true" paginationActiveColor="#9d3138" :autoplay="false" :autoplayTimeout="5000" :loop="true">
       <Slide v-for="news of data_slider" :key="news.id">
-        <div class="news-slider" v-if="news.images.length > 0" :style="`background: url('${news.images[0].src}') center no-repeat`" v-on:mouseup="up($event, news.id)" v-on:mousedown="down($event)">
+        <div :class="$mq == 'md' ? 'news-slider mobile' : 'news-slider'" v-if="news.images.length > 0" :style="`background: url('${news.images[0].src}') center no-repeat`" v-on:mouseup="up($event, news.id)" v-on:mousedown="down($event)">
           <div class="container">
             <h2>{{news.headline}}</h2>
             <p>{{news.subtitle}}</p>
@@ -164,6 +164,7 @@
     background-size: cover !important;
     color: white;
     display: flex;
+    position: relative;
     align-items: center;
   }
   .news-slider::after {
@@ -172,6 +173,7 @@
     width: 100%;
     height: 100%;
     top: 0;
+    left: 0;
     display: block;
     position: absolute;
     opacity: 0.5;
@@ -185,6 +187,13 @@
     font-size: 3rem;
     text-transform: uppercase;
     font-weight: 800;
+  }
+  .news-slider.mobile {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  .news-slider.mobile h2 {
+    font-size: 2rem;
   }
   .news-slider p {
     text-align: center;
