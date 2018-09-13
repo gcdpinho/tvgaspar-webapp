@@ -18,8 +18,8 @@ import 'font-awesome/css/font-awesome.min.css'
 
 Vue.config.productionTip = false
 // Vue.prototype.$apiURL = "http://localhost:3000"
-Vue.prototype.$apiURL = "https://tvgaspar-api.herokuapp.com"
-// Vue.prototype.$apiURL = "http://ec2-54-94-202-13.sa-east-1.compute.amazonaws.com:3000"
+// Vue.prototype.$apiURL = "https://tvgaspar-api.herokuapp.com"
+Vue.prototype.$apiURL = "http://ec2-54-94-202-13.sa-east-1.compute.amazonaws.com:3000"
 
 Vue.use(BootstrapVue)
 Vue.use(VueAxios, axios)
