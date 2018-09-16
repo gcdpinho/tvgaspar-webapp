@@ -199,6 +199,7 @@
           err => {
             // eslint-disable-next-line
             console.log(err);
+            this.loader = false;
             this.flg_error = true;
             setTimeout(() => {
               this.flg_error = false;
