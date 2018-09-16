@@ -131,7 +131,7 @@
           value: "",
           error: null
         },
-        email_to: "gcdpinho@gmail.com",
+        email_to: "contato@tvgaspar.com.br",
         flg_sucess: false,
         flg_error: false,
         position: {
@@ -149,7 +149,7 @@
             else
               this.name.error = null;
             if (this.email.value == "")
-              this.email.error = "Digite seu email";
+              this.email.error = "Digite seu e-mail";
             else
               this.email.error = null;
             if (this.message.value == "")
@@ -167,13 +167,13 @@
             break;
           case 'email':
             if (this.email.value == "")
-              this.email.error = "Digite seu nome";
+              this.email.error = "Digite seu e-mail";
             else
               this.email.error = null;
             break;
           case 'message':
             if (this.message.value == "")
-              this.message.error = "Digite seu nome";
+              this.message.error = "Digite sua mensagem";
             else
               this.message.error = null;
             break;
