@@ -153,7 +153,7 @@
         live_mobile_flg: false,
         adivisor: {
           id: 4924,
-          token: '4a68aeda540f867c2d1171bad0d885bf',
+          token: '4b7c5f1297d199ac39d1987ebc32c1db',
           url: 'https://apiadvisor.climatempo.com.br/api/v1/weather/locale',
           data: null
         },

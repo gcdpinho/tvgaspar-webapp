@@ -193,7 +193,7 @@
     padding-right: 30px;
   }
   .news-slider.mobile h2 {
-    font-size: 2rem;
+    font-size: 1.2rem;
   }
   .news-slider p {
     text-align: center;
