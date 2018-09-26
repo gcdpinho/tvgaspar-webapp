@@ -7,6 +7,7 @@ import Institutional from './../views/Institutional'
 import Contact from './../views/Contact'
 import Live from './../views/Live'
 import TVIndoor from './../views/TVIndoor'
+import Video from './../views/Video'
 
 Vue.use(Router)
 
@@ -52,6 +53,11 @@ export default new Router({
     {
       path: '/NewsByCategory/:category',
       redirect: '/NewsByCategory/:category/1'
+    },
+    {
+      path: '/Video',
+      name: 'Video',
+      component: Video
     }
   ]
 })

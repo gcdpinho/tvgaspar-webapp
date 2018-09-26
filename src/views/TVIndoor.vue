@@ -5,8 +5,14 @@
     <Navbar></Navbar>
     <section>
       <div class="container">
+        <div class="header">
+          <div class="header-title">
+            TV Gaspar
+          </div>
+          > TV indoor
+        </div>
         <div class="row row-text">
-          <p>A TV Gaspar conta com 20 TVs instaladas em diversos segmentos comerciais na cidade, onde leva informação e conteúdo, de uma forma rápida e direta. Uma alternativa muito eficiente e moderna para quem deseja anunciar em Gaspar.</p>
+          <p class="text-justify">A TV Gaspar conta com 20 TVs instaladas em diversos segmentos comerciais na cidade, onde leva informação e conteúdo, de uma forma rápida e direta. Uma alternativa muito eficiente e moderna para quem deseja anunciar em Gaspar.</p>
         </div>
         <div class="row">
           <div class="col-md-6">
@@ -23,8 +29,8 @@
           <div class="col-md-6">
             <img src="../assets/img/cartaz_tv_indoor.jpg">
           </div>
+          </div>
         </div>
-      </div>
     </section>
     <Footer></Footer>
   </div>
@@ -115,6 +121,10 @@
 
   .img-tv p.two {
     left: calc(50% - 9px);
+  }
+
+  .header {
+    margin-bottom: 20px;
   }
 </style>
 

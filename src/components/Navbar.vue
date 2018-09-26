@@ -8,126 +8,135 @@
               <div class="col-6">
                 <img class="logo" src="../assets/img/logo.png">
               </div>
-              <div class="col-6 date-temperature">
-                <div class="row" v-if="this.adivisor.data != null">
-                  <p>{{$moment(this.adivisor.data.date).format('dddd[,] LL')}} - {{this.adivisor.data.temperature}}°C</p>
-                  <div class="social-midia" :style="color == undefined || color == '' || color == null ? '--color: #9d3138': '--color:'+ color">
-                    <a href="https://www.facebook.com/tvgasparoficial" target="_blank">
-                      <v-icon>fa fa-facebook-square</v-icon>
-                    </a>
-                    <a href="https://twitter.com/TVGaspar?s=17" target="_blank">
-                      <v-icon>fa fa-twitter-square</v-icon>
-                    </a>
-                    <a href="https://www.youtube.com/user/canalgaspar" target="_blank">
-                      <v-icon>fa fa-youtube</v-icon>
-                    </a>
-                    <a href="https://www.instagram.com/tvgaspar" target="_blank">
-                      <v-icon>fa fa-instagram</v-icon>
-                    </a>
+                <div class="col-6 date-temperature">
+                  <div class="row" v-if="this.adivisor.data != null">
+                    <p>{{$moment(this.adivisor.data.date).format('dddd[,] LL')}} - {{this.adivisor.data.temperature}}°C</p>
+                    <div class="social-midia" :style="color == undefined || color == '' || color == null ? '--color: #9d3138': '--color:'+ color">
+                      <a href="https://www.facebook.com/tvgasparoficial" target="_blank">
+                        <v-icon>fa fa-facebook-square</v-icon>
+                      </a>
+                      <a href="https://twitter.com/TVGaspar?s=17" target="_blank">
+                        <v-icon>fa fa-twitter-square</v-icon>
+                      </a>
+                      <a href="https://www.youtube.com/user/canalgaspar" target="_blank">
+                        <v-icon>fa fa-youtube</v-icon>
+                      </a>
+                      <a href="https://www.instagram.com/tvgaspar" target="_blank">
+                        <v-icon>fa fa-instagram</v-icon>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+            <div class="col-6" id="col-ad">
+              <Ad type="topo"></Ad>
+            </div>
           </div>
-          <div class="col-6" id="col-ad">
-            <Ad type="topo"></Ad>
+        </div>
+        <div id="navbar" :style="color == undefined || color == '' || color == null ? '--color: #9d3138': '--color:'+ color">
+          <div class="container">
+            <ul>
+              <li :class="$route.name == 'Home' ? 'active' : ''">
+                <router-link to="/">Home</router-link>
+              </li>
+              <!-- <li>
+              <a>Mega Menu</a>
+            </li> -->
+              <li :class="$route.name == 'NewsByCategory' ? 'active' : ''">
+                <a class="bt-menu-dropdown news" v-on:click="news.show = !news.show">Notícias
+                  <v-icon>fa fa-chevron-down</v-icon>
+                </a>
+                <div class="menu-dropdown" v-if="news.show">
+                  <ul>
+                    <li class="item-menu" v-for="category of news.categories" :key="category.id">
+                      <router-link :to="`/NewsByCategory/${category.category}`">{{category.category}}</router-link>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li :class="$route.name == 'Live' ? 'active' : ''">
+                <a class="bt-menu-dropdown live" v-on:click="live.show = !live.show">Ao Vivo
+                  <v-icon>fa fa-chevron-down</v-icon>
+                </a>
+                <div class="menu-dropdown" v-if="live.show">
+                  <ul>
+                    <li class="item-menu" v-for="cam of live.cams" :key="cam.id">
+                      <router-link :to="{name: 'Live', params: {id: cam.id}}">{{cam.name}}</router-link>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li :class="$route.name == 'Video' ? 'active' : ''">
+                <router-link to="/Video">Vídeos</router-link>
+              </li>
+              <li :class="$route.name == 'TVIndoor' ? 'active' : ''">
+                <router-link to="/TVIndoor">TV Indoor</router-link>
+              </li>
+              <li :class="$route.name == 'Institutional' ? 'active' : ''">
+                <router-link to="/Institutional">Institucional</router-link>
+              </li>
+              <li :class="$route.name == 'Contact' ? 'active' : ''">
+                <router-link to="/Contact">Contato</router-link>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
-      <div id="navbar" :style="color == undefined || color == '' || color == null ? '--color: #9d3138': '--color:'+ color">
-        <div class="container">
-          <ul>
-            <li :class="$route.name == 'Home' ? 'active' : ''">
-              <router-link to="/">Home</router-link>
-            </li>
-            <!-- <li>
-              <a>Mega Menu</a>
-            </li> -->
-            <li :class="$route.name == 'NewsByCategory' ? 'active' : ''">
-              <a class="bt-menu-dropdown news" v-on:click="news.show = !news.show">Notícias
-                <v-icon>fa fa-chevron-down</v-icon>
-              </a>
-              <div class="menu-dropdown" v-if="news.show">
-                <ul>
-                  <li class="item-menu" v-for="category of news.categories" :key="category.id">
+      <div id="nav-mobile" :style="color == undefined || color == '' || color == null ? '--color: #9d3138': '--color:'+ color">
+        <div class="row">
+          <div class="col-6">
+            <v-icon class="menu-hamburguer" v-on:click="flg_open = !flg_open">fa fa-bars</v-icon>
+          </div>
+          <div class="col-6">
+            <img id="img-nav-mobile" src="../assets/img/logo-white.png">
+        </div>
+          </div>
+          <div class="background-open-menu" v-if="flg_open" v-on:click="close_menu($event)">
+            <div class="inner-menu-hamburguer">
+              <div class="item-menu-mobile">
+                <router-link to="/">Home</router-link>
+              </div>
+              <!-- <div class="item-menu-mobile">
+            <a>Mega Menu</a>
+          </div> -->
+              <div class="item-menu-mobile">
+                <a v-on:click="news_mobile_flg = !news_mobile_flg" :style="news_mobile_flg ? 'padding-bottom: 10px' : ''">Notícias
+                  <v-icon v-if="!news_mobile_flg">fa fa-chevron-down</v-icon>
+                  <v-icon v-if="news_mobile_flg">fa fa-chevron-up</v-icon>
+                </a>
+                <ul v-if="news_mobile_flg">
+                  <li class="inner-item-menu-mobile" v-for="category of news.categories" :key="category.id">
                     <router-link :to="`/NewsByCategory/${category.category}`">{{category.category}}</router-link>
                   </li>
                 </ul>
               </div>
-            </li>
-            <li :class="$route.name == 'Live' ? 'active' : ''">
-              <a class="bt-menu-dropdown live" v-on:click="live.show = !live.show">Ao Vivo
-                <v-icon>fa fa-chevron-down</v-icon>
-              </a>
-              <div class="menu-dropdown" v-if="live.show">
-                <ul>
-                  <li class="item-menu" v-for="cam of live.cams" :key="cam.id">
+              <div class="item-menu-mobile">
+                <a v-on:click="live_mobile_flg = !live_mobile_flg" :style="live_mobile_flg ? 'padding-bottom: 10px' : ''">Ao Vivo
+                  <v-icon v-if="!live_mobile_flg">fa fa-chevron-down</v-icon>
+                  <v-icon v-if="live_mobile_flg">fa fa-chevron-up</v-icon>
+                </a>
+                <ul v-if="live_mobile_flg">
+                  <li class="inner-item-menu-mobile" v-for="cam of live.cams" :key="cam.id">
                     <router-link :to="{name: 'Live', params: {id: cam.id}}">{{cam.name}}</router-link>
                   </li>
                 </ul>
               </div>
-            </li>
-            <li :class="$route.name == 'TVIndoor' ? 'active' : ''">
-              <router-link to="/TVIndoor">TV Indoor</router-link>
-            </li>
-            <li :class="$route.name == 'Institutional' ? 'active' : ''">
-              <router-link to="/Institutional">Institucional</router-link>
-            </li>
-            <li :class="$route.name == 'Contact' ? 'active' : ''">
-              <router-link to="/Contact">Contato</router-link>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div id="nav-mobile" :style="color == undefined || color == '' || color == null ? '--color: #9d3138': '--color:'+ color">
-      <div class="row">
-        <div class="col-6">
-          <v-icon class="menu-hamburguer" v-on:click="flg_open = !flg_open">fa fa-bars</v-icon>
-        </div>
-        <div class="col-6">
-          <img id="img-nav-mobile" src="../assets/img/logo-white.png">
-        </div>
-      </div>
-      <div class="background-open-menu" v-if="flg_open" v-on:click="close_menu($event)">
-        <div class="inner-menu-hamburguer">
-          <div class="item-menu-mobile">
-            <router-link to="/">Home</router-link>
-          </div>
-          <!-- <div class="item-menu-mobile">
-            <a>Mega Menu</a>
-          </div> -->
-          <div class="item-menu-mobile">
-            <a v-on:click="news_mobile_flg = !news_mobile_flg" :style="news_mobile_flg ? 'padding-bottom: 10px' : ''">Notícias
-              <v-icon v-if="!news_mobile_flg">fa fa-chevron-down</v-icon>
-              <v-icon v-if="news_mobile_flg">fa fa-chevron-up</v-icon>
-            </a>
-            <ul v-if="news_mobile_flg">
-              <li class="inner-item-menu-mobile" v-for="category of news.categories" :key="category.id">
-                <router-link :to="`/NewsByCategory/${category.category}`">{{category.category}}</router-link>
-              </li>
-            </ul>
-          </div>
-          <div class="item-menu-mobile">
-            <a v-on:click="live_mobile_flg = !live_mobile_flg" :style="live_mobile_flg ? 'padding-bottom: 10px' : ''">Ao Vivo
-              <v-icon v-if="!live_mobile_flg">fa fa-chevron-down</v-icon>
-              <v-icon v-if="live_mobile_flg">fa fa-chevron-up</v-icon>
-            </a>
-            <ul v-if="live_mobile_flg">
-              <li class="inner-item-menu-mobile" v-for="cam of live.cams" :key="cam.id">
-                <router-link :to="{name: 'Live', params: {id: cam.id}}">{{cam.name}}</router-link>
-              </li>
-            </ul>
-          </div>
-          <div class="item-menu-mobile">
-            <a>TV Indoor</a>
-          </div>
-          <div class="item-menu-mobile">
-            <a>Institucional</a>
+              <div class="item-menu-mobile">
+                <router-link to="/Video">Vídeos</router-link>
+              </div>
+              <div class="item-menu-mobile">
+                <router-link to="/TVIndoor">TV Indoor</router-link>
+              </div>
+              <div class="item-menu-mobile">
+                <router-link to="/Institutional">Institucional</router-link>
+              </div>
+              <div class="item-menu-mobile">
+                <router-link to="/Contact">Contato</router-link>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
   </header>
 </template>
 
@@ -153,7 +162,7 @@
         live_mobile_flg: false,
         adivisor: {
           id: 4924,
-          token: '4b7c5f1297d199ac39d1987ebc32c1db',
+          token: '019082d69de3ae8acd67eec82379015c',
           url: 'https://apiadvisor.climatempo.com.br/api/v1/weather/locale',
           data: null
         },
