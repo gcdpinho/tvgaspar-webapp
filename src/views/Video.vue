@@ -58,7 +58,7 @@
       return {
         loader: true,
         videos: [],
-        limit: 2,
+        limit: 20,
         flg_player: false,
         video_play: null,
         link_img: "https://img.youtube.com/vi",

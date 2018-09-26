@@ -6,7 +6,7 @@
           <div class="col-6">
             <div class="row">
               <div class="col-6">
-                <img class="logo" src="../assets/img/logo.png">
+                <img class="logo" src="../assets/img/logo-new.png">
               </div>
                 <div class="col-6 date-temperature">
                   <div class="row" v-if="this.adivisor.data != null">
@@ -163,7 +163,7 @@
         adivisor: {
           id: 4924,
           token: '019082d69de3ae8acd67eec82379015c',
-          url: 'https://apiadvisor.climatempo.com.br/api/v1/weather/locale',
+          url: 'http://apiadvisor.climatempo.com.br/api/v1/weather/locale',
           data: null
         },
         live: {

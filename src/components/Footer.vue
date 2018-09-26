@@ -3,7 +3,7 @@
     <div class="inner-footer">
       <div class="row">
         <div class="col-6" id="col-logo">
-          <img class="logo" src="../assets/img/logo-white.png">
+          <img class="logo" src="../assets/img/logo-new-white.png">
         </div>
         <div class="col-6">
           <h3>Categorias</h3>
