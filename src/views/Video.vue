@@ -29,7 +29,7 @@
     </section>
     <div class="modal-player" v-if="flg_player" v-on:click="closeModal($event)">
       <v-icon>fa fa-close</v-icon>
-      <iframe width="80%" height="60%" :src="video_play"></iframe>
+      <iframe :width="$mq !== 'desktop' ? '100%' : '80%'" height="60%" :src="video_play"></iframe>
     </div>
     <Footer></Footer>
   </div>
@@ -179,6 +179,7 @@
       height: 100%;
       width: auto;
       margin: auto;
+      max-width: 100%;
     }
     .card-video {
       border-bottom: 1px solid #49494d;

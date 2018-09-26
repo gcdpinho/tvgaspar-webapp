@@ -20,7 +20,8 @@
         <div class="thumb">
           <div class="each-video" v-for="(video, index) of this.data_gallery" :key="video.id">
             <div class="thumb-video" v-on:click="change_gallery(video, index)"></div>
-            <iframe width="100%" height="100%" :src="video.src"></iframe>
+            <img width="100%" height="100%" :src="getThumbVideo(video.src)">
+            <v-icon>fa fa-play</v-icon>
           </div>
         </div>
       </div>
@@ -38,6 +39,8 @@
       return {
         data_gallery: [],
         first_data_gallery: null,
+        link_img: "https://img.youtube.com/vi",
+        img_quality: "mqdefault.jpg",
         limit: 5
       }
     },
@@ -61,6 +64,10 @@
         let first_aux = this.first_data_gallery;
         this.first_data_gallery = video;
         this.data_gallery[index] = first_aux;
+      },
+      getThumbVideo: function (src) {
+        const id = src.split('embed/')[1].split('?')[0];
+        return `${this.link_img}/${id}/${this.img_quality}`;
       }
     }
   }
@@ -76,8 +83,9 @@
     height: 100%;
     position: absolute;
     background: rgba(0, 0, 0, 0.5);
+    z-index: 10;
   }
-  .thumb-video:hover {
+  .each-video:hover .thumb-video{
     opacity: 0.5;
   }
   .each-video {
@@ -89,6 +97,19 @@
     color: white;
     margin-bottom: 20px;
   }
+  .each-video i {
+    position: absolute;
+    display: none;
+    font-size: 40px;
+    left: calc(50% - 12px);
+    top: calc(50% - 20px);
+    color: #9d3138;
+  }
+
+  .each-video:hover i {
+    display: block;
+  }
+
   .mobile {
     display: none;
   }
