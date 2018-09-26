@@ -97,14 +97,11 @@
       };
     },
     mounted() {
-      this.$http.post(`${this.$apiURL}/news/byTag`, {
+      this.$http.post(`${this.$apiURL}/news/byTag?pageSize=${this.limit}`, {
         tag: 'notícia'
       }).then(
         res => {
-          if (res.data.length > this.limit)
-            this.allNews = res.data.slice(0, this.limit);
-          else
-            this.allNews = res.data;
+          this.allNews = res.data.news;
           Promise.all(this.allNews.map(news =>
             news.images.map(image =>
               firebase.storage().ref().child(`imagens/${image.src}`).getDownloadURL()

@@ -47,11 +47,11 @@
     mounted() {
       switch (this.type) {
         case "videos":
-          this.$http.post(`${this.$apiURL}/video/byTag`, {
+          this.$http.post(`${this.$apiURL}/video/byTag?pageSize=${this.limit}`, {
             tag: 'slider'
           }).then(res => {
-            this.first_data_gallery = res.data[0];
-            this.data_gallery = res.data.slice(1, this.limit);
+            this.first_data_gallery = res.data.videos[0];
+            this.data_gallery = res.data.videos.slice(1, this.limit);
           }, err => {
             // eslint-disable-next-line
             console.log(err);

@@ -10,33 +10,23 @@
       <div class="container">
         <div class="row">
           <div :class="`col-${$mq === 'md' ? 12 : 9}`" :style="allNews.length > 0 ? `--color:${color}` : ''">
-            <div class="row each" v-for="news of newsPerPage()" :key="news.id" v-on:click="showNews(news.id)">
+            <div class="row each" v-for="news of allNews" :key="news.id" v-on:click="showNews(news.id)">
               <div class="col-md-4 text-center">
                 <img class="img-news" v-if="news.images.length > 0" :src="news.images[0].src">
               </div>
-              <div class="col-md-8">
-                <h3 :style="`color:${color}`">{{news.headline}}</h3>
-                <p>{{news.abstract}}</p>
+                <div class="col-md-8">
+                  <h3 :style="`color:${color}`">{{news.headline}}</h3>
+                  <p>{{news.abstract}}</p>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col-3" v-if="allNews.length > 0 && $mq != 'md'">
-            <Ad type="vertical"></Ad>
-            <Highlights></Highlights>
-          </div>
-          <div class="col-12 text-center buttons-pagination" v-if="allNews.length > 0 && this.news_page < allNews.length" :style="allNews.length > 0 ? `--color:${color}` : ''">
-            <button v-on:click="newPage('previous')" class="ant">
-              <v-icon>fa fa-angle-double-left</v-icon>
-            </button>
-            <button v-if="parseInt(page)-1 > 0" v-on:click="newPage(parseInt(page)-1)">{{parseInt(page)-1}}</button>
-            <button v-on:click="newPage(page)" class="active">{{page}}</button>
-            <button v-if="parseInt(page)+1 <= Math.ceil(this.allNews.length/this.news_page)" v-on:click="newPage(parseInt(page)+1)">{{parseInt(page)+1}}</button>
-            <button v-on:click="newPage('next')" class="prox">
-              <v-icon>fa fa-angle-double-right</v-icon>
-            </button>
+            <div class="col-3" v-if="allNews.length > 0 && $mq != 'md'">
+              <Ad type="vertical"></Ad>
+              <Highlights></Highlights>
+            </div>
+            <Pagination :pagination="pagination" :length_object="allNews.length" :color="color" :category="category" pageName="NewsByCategory"></Pagination>
           </div>
         </div>
-      </div>
     </section>
     <Footer></Footer>
   </div>
@@ -48,6 +38,7 @@
   import Slider from "./../components/Slider.vue";
   import Highlights from "./../components/Highlights.vue";
   import Ad from "./../components/Ad.vue";
+  import Pagination from "./../components/Pagination.vue";
   import firebase from 'firebase';
   import ClipLoader from 'vue-spinner/src/ClipLoader.vue';
 
@@ -63,14 +54,16 @@
       Slider,
       ClipLoader,
       Ad,
-      Highlights
+      Highlights,
+      Pagination
     },
     data() {
       return {
         loader: true,
         allNews: [],
         color: "",
-        news_page: 10
+        news_page: 10,
+        pagination: undefined
       }
     },
     mounted() {
@@ -85,15 +78,17 @@
           console.log(err);
         }
       );
-
-      this.$http.post(`${this.$apiURL}/news/byTagByCategory`, {
+      if (this.page == 0)
+        this.$router.push({ name: "NewsByCategory", params: { category: this.category, page: 1 } });
+      this.$http.post(`${this.$apiURL}/news/byTagByCategory?page=${this.page}&pageSize=${this.news_page}`, {
         tag: 'notícia',
         category: this.category
       }).then(
         res => {
-          this.allNews = res.data;
-          if (Math.ceil(this.allNews.length / this.news_page) < this.page || this.page <= 0)
-            this.$router.push({ name: "NewsByCategory", params: { category: this.category, page: 1 } });
+          if (res.data.pagination.pageCount < this.page)
+            this.$router.push({ name: "NewsByCategory", params: { category: this.category, page: res.data.pagination.pageCount } });
+          this.allNews = res.data.news;
+          this.pagination = res.data.pagination;
           Promise.all(this.allNews.map(news =>
             news.images.map(image =>
               firebase.storage().ref().child(`imagens/${image.src}`).getDownloadURL()
@@ -121,26 +116,12 @@
       showNews: function (idNews) {
         this.$router.push({ name: "NewsById", params: { id: idNews } })
       },
+      // TO DO: remove
       newsPerPage: function () {
         let aux = this.news_page * this.page - this.news_page;
         let arrNews = this.allNews.slice(aux, aux + this.news_page > this.allNews.length ? this.allNews.length : aux + this.news_page);
 
         return arrNews;
-      },
-      newPage: function (pagination) {
-        switch (pagination) {
-          case 'next':
-            if (parseInt(this.page) + 1 <= Math.ceil(this.allNews.length / this.news_page))
-              this.$router.push({ name: "NewsByCategory", params: { category: this.category, page: parseInt(this.page) + 1 } });
-            break;
-          case 'previous':
-            if (parseInt(this.page) - 1 > 0)
-              this.$router.push({ name: "NewsByCategory", params: { category: this.category, page: parseInt(this.page) - 1 } });
-            break;
-          default:
-            this.$router.push({ name: "NewsByCategory", params: { category: this.category, page: pagination } });
-            break;
-        }
       }
     }
   }
@@ -175,30 +156,7 @@
   .each h3 {
     margin-bottom: 20px;
   }
-  .buttons-pagination button {
-    background: transparent;
-    color: var(--color);
-    border: none;
-    font-size: 18px;
-    cursor: pointer;
-    padding: 5px 15px;
-  }
-  .buttons-pagination button:hover,
-  button.active {
-    font-size: 20px;
-    font-weight: bold;
-  }
 
-  .buttons-pagination button:hover i {
-    font-size: 20px;
-    font-weight: bold;
-  }
-  button.ant {
-    border-radius: 5px 0 0 5px;
-  }
-  button.prox {
-    border-radius: 0 5px 5px 0;
-  }
   @media (max-width: 767px) {
     #news-vertical img {
       height: auto;

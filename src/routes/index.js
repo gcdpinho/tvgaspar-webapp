@@ -55,9 +55,14 @@ export default new Router({
       redirect: '/NewsByCategory/:category/1'
     },
     {
-      path: '/Video',
+      path: '/Video/:page',
       name: 'Video',
-      component: Video
-    }
+      component: Video,
+      props: true
+    },
+    {
+      path: '/Video',
+      redirect: '/Video/1'
+    },
   ]
 })

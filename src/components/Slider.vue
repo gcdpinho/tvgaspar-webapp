@@ -62,11 +62,11 @@
       switch (this.type) {
         case "news":
           if (this.category == undefined)
-            this.$http.post(`${this.$apiURL}/news/byTagNotCategory`, {
+            this.$http.post(`${this.$apiURL}/news/byTagNotCategory?pageSize=${this.limit_news}`, {
               tag: "slider",
               category: "Colunista"
             }).then(res => {
-              this.data_slider = res.data.slice(0, this.limit_news);
+              this.data_slider = res.data.news;
               this.data_slider.map(news =>
                 news.images.map(image =>
                   firebase.storage().ref().child(`imagens/${image.src}`).getDownloadURL()
@@ -80,11 +80,11 @@
               console.log(err);
             });
           else
-            this.$http.post(`${this.$apiURL}/news/byTagByCategory`, {
+            this.$http.post(`${this.$apiURL}/news/byTagByCategory?pageSize=${this.limit_news}`, {
               tag: "slider",
               category: this.category
             }).then(res => {
-              this.data_slider = res.data.slice(0, this.limit_news);
+              this.data_slider = res.data.news;
               this.data_slider.map(news =>
                 news.images.map(image =>
                   firebase.storage().ref().child(`imagens/${image.src}`).getDownloadURL()
@@ -113,11 +113,11 @@
           });
           break;
         case "news-columnist":
-          this.$http.post(`${this.$apiURL}/news/byTagByCategory`, {
+          this.$http.post(`${this.$apiURL}/news/byTagByCategory?pageSize=${this.limit_columnist}`, {
             tag: "slider",
             category: 'Colunista'
           }).then(res => {
-            this.data_slider = res.data.slice(0, this.limit_columnist);
+            this.data_slider = res.data.news
             this.data_slider.map(news =>
               news.images.map(image =>
                 firebase.storage().ref().child(`imagens/${image.src}`).getDownloadURL()

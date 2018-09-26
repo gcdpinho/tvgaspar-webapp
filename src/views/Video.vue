@@ -11,7 +11,7 @@
           </div>
           > Todos os vídeos
         </div>
-        <div class="row">
+        <div class="row row-video">
           <div class="col-lg-6 card-video" v-for="video of videos" :key="video.id" v-on:click="playVideo(video.src)">
             <div class="row video-line">
               <div :class="`col-${($mq === 'sm' ||  $mq === 'md') ? 12 : 6} col-img`">
@@ -25,6 +25,7 @@
             </div>
           </div>
         </div>
+        <Pagination :pagination="pagination" :length_object="videos.length" color="#9d3138" pageName="Video"></Pagination>
       </div>
     </section>
     <div class="modal-player" v-if="flg_player" v-on:click="closeModal($event)">
@@ -39,31 +40,42 @@
 <script>
   import Navbar from "./../components/Navbar.vue";
   import Footer from "./../components/Footer.vue";
+  import Pagination from "./../components/Pagination.vue";
   import ClipLoader from 'vue-spinner/src/ClipLoader.vue';
 
   export default {
     name: "Video",
+    props: {
+      page: 0
+    },
     components: {
       Navbar,
       Footer,
-      ClipLoader
+      ClipLoader,
+      Pagination
     },
     data() {
       return {
         loader: true,
-        videos: null,
-        limit: 20,
+        videos: [],
+        limit: 2,
         flg_player: false,
         video_play: null,
         link_img: "https://img.youtube.com/vi",
-        img_quality: "mqdefault.jpg"
+        img_quality: "mqdefault.jpg",
+        pagination: null
       }
     },
     mounted() {
-      this.$http.post(`${this.$apiURL}/video/byTag`, {
+      if (this.page == 0)
+        this.$router.push({ name: "Video", params: { page: 1 } });
+      this.$http.post(`${this.$apiURL}/video/byTag?page=${this.page}&pageSize=${this.limit}`, {
         tag: 'slider'
       }).then(res => {
-        this.videos = res.data.slice(0, this.limit);
+        if (res.data.pagination.pageCount < this.page)
+          this.$router.push({ name: "Video", params: { page: res.data.pagination.pageCount } });
+        this.videos = res.data.videos;
+        this.pagination = res.data.pagination;
         this.loader = false;
       }, err => {
         // eslint-disable-next-line
@@ -164,7 +176,14 @@
     top: 20%;
   }
 
+  .row-video {
+    margin-bottom: 25px;
+  }
+
   @media (max-width: 992px) {
+    .modal-player iframe{
+      left: 0;
+    }
     .video-line {
       height: auto;
     }

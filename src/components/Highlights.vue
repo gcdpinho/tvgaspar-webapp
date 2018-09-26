@@ -22,10 +22,10 @@
       }
     },
     mounted() {
-      this.$http.post(`${this.$apiURL}/news/byTag`, {
+      this.$http.post(`${this.$apiURL}/news/byTag?pageSize=${this.limit_news}`, {
         tag: "slider",
       }).then(res => {
-        this.news_destaque = res.data.slice(0, this.limit_news);
+        this.news_destaque = res.data.news;
         this.news_destaque.map(news =>
           news.images.map(image =>
             firebase.storage().ref().child(`imagens/${image.src}`).getDownloadURL()
