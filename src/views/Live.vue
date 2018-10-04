@@ -6,15 +6,16 @@
     <section>
       <div class="container">
         <div class="row">
-          <div class="col-9">
-          <iframe width="100%" height="400px" :src="cams[id].src"></iframe>
+          <div :class="`col-${$mq === 'md' ? 12 : 9}`">
+            <!-- <iframe width="100%" height="400px" :src="cams[id].src"></iframe> -->
+            <img :src="require('../assets/img/manutencao.jpg')">
           </div>
-          <div class="col-3">
-            <Ad type="vertical"></Ad>
-            <Highlights></Highlights>
+            <div class="col-3" v-if="$mq != 'md'">
+              <Ad type="vertical"></Ad>
+              <Highlights></Highlights>
+            </div>
           </div>
         </div>
-      </div>
     </section>
     <Footer></Footer>
   </div>
@@ -61,6 +62,10 @@
     display: flex;
     flex-direction: column;
     height: 100%;
+  }
+
+  img {
+    width: 100%;
   }
   @media (max-width: 767px) {
     iframe {

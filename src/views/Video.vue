@@ -146,7 +146,7 @@
     font-size: 40px;
     left: calc(50% - 12px);
     top: calc(50% - 20px);
-    z-index: 10;
+    z-index: 4;
     color: #9d3138;
   }
   .header {

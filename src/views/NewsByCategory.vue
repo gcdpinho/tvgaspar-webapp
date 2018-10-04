@@ -85,7 +85,7 @@
         category: this.category
       }).then(
         res => {
-          if (res.data.pagination.pageCount < this.page)
+          if (res.data.pagination.pageCount < this.page && res.data.pagination.pageCount > 0)
             this.$router.push({ name: "NewsByCategory", params: { category: this.category, page: res.data.pagination.pageCount } });
           this.allNews = res.data.news;
           this.pagination = res.data.pagination;

@@ -89,7 +89,7 @@
             <v-icon class="menu-hamburguer" v-on:click="flg_open = !flg_open">fa fa-bars</v-icon>
           </div>
           <div class="col-6">
-            <img id="img-nav-mobile" src="../assets/img/logo-white.png">
+            <img id="img-nav-mobile" src="../assets/img/logo-new-white.png">
         </div>
           </div>
           <div class="background-open-menu" v-if="flg_open" v-on:click="close_menu($event)">
@@ -345,6 +345,10 @@
   }
   #nav-mobile li a {
     padding: 10px 0;
+  }
+
+  #nav-mobile li {
+    width: 100%;
   }
 
   .date-temperature {

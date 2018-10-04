@@ -6,7 +6,7 @@
           <div class="header-title">
             Vídeos
           </div>
-          > Últimos vídeos
+          > <router-link to="/Video">Últimos vídeos</router-link>
         </div>
         <iframe width="100%" height="100%" :src="first_data_gallery.src"></iframe>
       </div>
@@ -15,7 +15,7 @@
           <div class="header-title">
             Vídeos
           </div>
-          > Últimos vídeos
+          > <router-link to="/Video">Últimos vídeos</router-link>
         </div>
         <div class="thumb">
           <div class="each-video" v-for="(video, index) of this.data_gallery" :key="video.id">
@@ -68,7 +68,10 @@
       getThumbVideo: function (src) {
         const id = src.split('embed/')[1].split('?')[0];
         return `${this.link_img}/${id}/${this.img_quality}`;
-      }
+      },
+      goVideos: function (idNews) {
+        this.$router.push({ name: "NewsById", params: { id: idNews } })
+      },
     }
   }
 </script>
@@ -85,7 +88,7 @@
     background: rgba(0, 0, 0, 0.5);
     z-index: 10;
   }
-  .each-video:hover .thumb-video{
+  .each-video:hover .thumb-video {
     opacity: 0.5;
   }
   .each-video {
@@ -104,6 +107,10 @@
     left: calc(50% - 12px);
     top: calc(50% - 20px);
     color: #9d3138;
+  }
+
+  .header a{
+    color: white;
   }
 
   .each-video:hover i {
