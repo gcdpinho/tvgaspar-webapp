@@ -261,6 +261,7 @@
     color: white !important;
   }
   header {
+    margin-top: 15px;
     margin-bottom: 30px;
   }
   .menu-dropdown {
@@ -388,6 +389,7 @@
       display: block;
     }
     header {
+      margin-top: 0;
       margin-bottom: 80px;
     }
   }
