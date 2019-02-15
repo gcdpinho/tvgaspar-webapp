@@ -124,10 +124,12 @@
   .col-img {
     display: flex;
     position: relative;
+    height: 100%;
   }
   .col-txt {
     display: block;
     overflow: hidden;
+    height: 100%;
   }
   .card-video {
     cursor: pointer;

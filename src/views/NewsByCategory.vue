@@ -11,7 +11,7 @@
         <div class="row">
           <div :class="`col-${$mq === 'md' ? 12 : 9}`" :style="allNews.length > 0 ? `--color:${color}` : ''">
             <div class="row each" v-for="news of allNews" :key="news.id" v-on:click="showNews(news.id)">
-              <div class="col-md-4 text-center">
+              <div class="col-md-4 text-center full-height">
                 <img class="img-news" v-if="news.images.length > 0" :src="news.images[0].src">
               </div>
                 <div class="col-md-8">
@@ -155,6 +155,10 @@
   }
   .each h3 {
     margin-bottom: 20px;
+  }
+  
+  .full-height {
+    height: 100%;
   }
 
   @media (max-width: 767px) {
